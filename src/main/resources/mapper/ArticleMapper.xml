@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bdu.jiajiao.mapper.ArticleMapper">
+    <insert id="addArticle" parameterType="Article">
+        insert into jiajiao.article(title, content, creator, creator_id, create_time,type)
+        values (#{title}, #{content}, #{creator}, #{creatorId}, #{createTime}, #{type})
+    </insert>
+
+    <select id="queryAllTeaArticle" resultType="Article">
+        select *
+        from jiajiao.article
+        where type = 1
+    </select>
+
+    <select id="queryAllStuArticle" resultType="Article">
+        select *
+        from jiajiao.article
+        where type = 3
+    </select>
+
+    <select id="queryByName" resultType="Article">
+        select *
+        from jiajiao.article
+        where creator = #{creator}
+    </select>
+
+    <select id="queryById" resultType="Article">
+        select *
+        from jiajiao.article
+        where id = #{id}
+    </select>
+
+</mapper>

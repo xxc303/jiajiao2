@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bdu.jiajiao.mapper.StudentMapper">
+
+    <select id="queryAllStudent" resultType="Student">
+        select *
+        from jiajiao.student
+        where status != 0
+    </select>
+
+    <select id="login" resultType="Student">
+        select *
+        from jiajiao.student
+        where username = #{username}
+          and password = #{password}
+    </select>
+
+    <select id="queryStudentById" resultType="Student">
+        select *
+        from jiajiao.student
+        where id = #{id}
+    </select>
+
+    <select id="queryStudentByUsername" resultType="Student">
+        select *
+        from jiajiao.student
+        where username = #{username}
+    </select>
+
+    <select id="findByToken" resultType="Student">
+        select *
+        from jiajiao.student
+        where token = #{token}
+    </select>
+
+    <insert id="addStudent" parameterType="Student">
+        insert into jiajiao.student (username, password, item, id_number, area, address, phone, price, sex, create_time,
+                                     id_requirement, detail_requirement, school, grade, score, charac,status)
+        values (#{username}, #{password}, #{item}, #{idNumber}, #{area}, #{address}, #{phone}, #{price}, #{sex},
+                #{createTime}, #{idRequirement}, #{detailRequirement}, #{school}, #{grade}, #{score}, #{charac}, #{state})
+    </insert>
+
+    <update id="updateStudent" parameterType="Student">
+        update jiajiao.student
+        set username=#{username},
+            password=#{password},
+            item=#{item},
+            id_number=#{idNumber},
+            area=#{area},
+            address=#{address},
+            phone=#{phone},
+            price=#{price},
+            sex=#{sex},
+            token = #{token},
+            create_time=#{createTime},
+            id_requirement=#{idRequirement},
+            detail_requirement=#{detailRequirement},
+            school=#{school},
+            grade=#{grade},
+            score=#{score},
+            charac=#{charac},
+            status=#{state}
+        where id = #{id}
+    </update>
+
+    <select id="queryStudentByIdNumber" resultType="Student">
+        select *
+        from jiajiao.student
+        where id_number = #{idNumber}
+    </select>
+
+    <select id="search" parameterType="string" resultType="Student">
+        select *
+        from jiajiao.student
+        where concat(item,area)
+        like concat('%',#{param},'%')
+    </select>
+
+    <delete id="delete">
+        delete * from jiajiao.student where id = #{id}
+    </delete>
+</mapper>
