@@ -174,10 +174,10 @@
                         <div class="nr2">
                             <span class="comment_left">综合评价：</span> <span class="comment_right" th:text="${comment.overview}" style="margin-right: 50px;color:green"></span>
                         </div>
-                        <span class="glyphicon glyphicon-comment comment_reply" th:data-id="${comment.id}" onclick="collapseComments(this)"></span>
+                        <span class="glyphicon glyphicon-comment comment_reply" th:data-id="${comment.id}" onclick="collapseComments(this)" style="margin-top: 6px;"></span>
 
                         <div class="collapse sub-comment" th:id="${'comment-'+comment.id}">
-                            <div class="form-group">
+                            <div class="form-group" style="height: 55px;">
                                 <input type="text" class="form-control" placeholder="评论一下……" autocomplete="off"
                                        th:id="${'input-'+comment.id}">
                                 <button type="button" class="btn btn-success pull-right" onclick="reply(this)"
