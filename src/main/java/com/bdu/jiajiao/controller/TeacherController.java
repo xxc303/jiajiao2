@@ -1,13 +1,12 @@
 package com.bdu.jiajiao.controller;
 
-import com.bdu.jiajiao.dto.BaseInfoDTO;
-import com.bdu.jiajiao.dto.PasswordDTO;
-import com.bdu.jiajiao.dto.TeaPublicOrderDTO;
+import com.bdu.jiajiao.dto.*;
 import com.bdu.jiajiao.mapper.CommentMapper;
 import com.bdu.jiajiao.mapper.ArticleMapper;
 import com.bdu.jiajiao.mapper.OrderMapper;
 import com.bdu.jiajiao.mapper.TeacherMapper;
 import com.bdu.jiajiao.pojo.*;
+import com.bdu.jiajiao.service.StudentService;
 import com.bdu.jiajiao.service.TeacherService;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.BeanUtils;
@@ -36,6 +35,9 @@ public class TeacherController {
 
     @Autowired
     private TeacherService teacherService;
+
+    @Autowired
+    private StudentService studentService;
 
     @Autowired
     private CommentMapper commentMapper;
@@ -85,6 +87,32 @@ public class TeacherController {
         articleMapper.addArticle(article);
         model.addAttribute("type", "teacher");
         return "redirect:/teacher/toPublish";
+    }
+
+    /**
+     * 预约
+     */
+    @RequestMapping("/teaReserve")
+    public Object teaReserve(@RequestBody OrderDTO orderDTO,
+                             HttpServletRequest request){
+        Student studentdb = studentService.findById(orderDTO.getStudentId());
+        Student student = (Student) request.getSession().getAttribute("student");
+        Teacher teacher = (Teacher) request.getSession().getAttribute("teacher");
+        if (student == null && teacher == null) {
+            return ResultDTO.errorOf(500, "请登录");
+        }
+        Order order = new Order();
+        order.setTeaName(teacher.getUsername());
+        order.setTeaPhone(teacher.getPhone());
+        order.setStuName(studentdb.getUsername());
+        order.setStuPhone(studentdb.getPhone());
+        order.setItem(studentdb.getItem());
+        order.setAddress(studentdb.getAddress());
+        order.setPrice(studentdb.getPrice());
+        order.setCreateTime(new Date());
+        order.setType(0);
+        orderMapper.addOrder(order);
+        return ResultDTO.okOf();
     }
 
     /**

@@ -8,6 +8,7 @@
     <script src="/js/jquery-3.4.1.min.js" type="text/javascript"></script>
     <script src="/vendor/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
     <script src="/vendor/popper.js/umd/popper.min.js" type="text/javascript"> </script>
+    <script src="/js/jiajiao.js" type="text/javascript"></script>
     <link rel="stylesheet" href="/css/bootstrap.min.css">
     <link rel="stylesheet" href="/css/bootstrap-theme.min.css">
     <script type="text/javascript">
@@ -164,7 +165,9 @@
                         </li><br>
                         <br>
                         <li style="margin-left: -38px">
+                            <input type="hidden" id="student_id" th:value="${student.id}">
                             <span><button type="button" class="btn btn-success" th:if="${session.teacher!=null}" th:text="${student.phone}"></button></span>
+                            <span><button type="button" class="btn btn-success" th:if="${session.teacher!=null}" onclick="teaReserve()">添加预约</button></span>
                             <span><button type="button" class="btn btn-success" th:if="${session.teacher==null}" th:text="家教登录接治"></button></span>
                         </li>
                     </ul>

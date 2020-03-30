@@ -170,9 +170,9 @@
                                         <th>操作</th>
                                     </tr>
                                     </thead>
-                                    <tbody th:each="order:${orders}">
+                                    <tbody th:each="order,orderStat:${orders}">
                                     <tr>
-                                        <td th:text="${order.id}"></td>
+                                        <td th:text="${orderStat.index+1}"></td>
                                         <td th:text="${order.teaName}" th:if="${type=='student'}"></td>
                                         <td th:text="${order.stuName}" th:if="${type=='teacher'}"></td>
 

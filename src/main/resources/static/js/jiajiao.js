@@ -122,7 +122,7 @@ function reserve() {
         url: "/student/reserve",
         contentType: "application/json",
         data: JSON.stringify({
-            "teacherId": teacherId,
+            "teacherId": teacherId
         }),
         success: function (response) {
             console.log(response);
@@ -137,3 +137,25 @@ function reserve() {
     });
 }
 
+function teaReserve() {
+    var studentId = $("#student_id").val();
+    console.log(studentId);
+    $.ajax({
+        type: "post",
+        url: "/teacher/teaReserve",
+        contentType: "application/json",
+        data: JSON.stringify({
+            "studentId": studentId
+        }),
+        success: function (response) {
+            console.log(response);
+            if (response.code === 200) {
+                window.location.reload();
+
+            } else if (response.code === 500) {
+                alert("请先登录！");
+            }
+        },
+        dataType: "json"
+    });
+}
