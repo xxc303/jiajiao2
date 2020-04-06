@@ -81,7 +81,7 @@
                                             </thead>
                                             <tbody th:each="comment:${commentList.list}">
                                             <tr>
-                                                <td th:text="${comment.id}"></td>
+                                                <td th:text="${commentList.pageNum}"></td>
                                                 <td th:text="${comment.commentator}" style="width: 80px;"></td>
                                                 <td th:text="${comment.item}"></td>
                                                 <td th:text="${comment.content}"></td>
@@ -97,7 +97,7 @@
                                         <nav aria-label="Page navigation">
                                             <ul class="pagination">
                                                 <li th:if="${commentList.hasPreviousPage}">
-                                                    <a th:href="@{'/admin/commentInfo/?pageNum'+${(commentList.pageNum)-1}}"
+                                                    <a th:href="@{'/admin/commentInfo/?pageNum='+${(commentList.pageNum)-1}+'&pageSize='+${commentList.pageSize}}"
                                                        aria-label="Previous">
                                                         <span aria-hidden="true">&lt;&lt;</span>
                                                     </a>
@@ -122,62 +122,6 @@
                                         <hr>
                                     </div>
                                 </div>
-<!--                                <div class="card">-->
-<!--                                    <div class="card-header">-->
-<!--                                        <h4 class="text-uppercase mb-0">回复内容管理</h4>-->
-<!--                                    </div>-->
-<!--                                    <div class="card-body">-->
-<!--                                        <table class="table table-hover">-->
-<!--                                            <thead>-->
-<!--                                            <tr>-->
-<!--                                                <th>id</th>-->
-<!--                                                <th>用户名</th>-->
-<!--                                                <th>回复内容</th>-->
-<!--                                                <th>回复时间</th>-->
-<!--                                                <th>操作</th>-->
-<!--                                            </tr>-->
-<!--                                            </thead>-->
-<!--                                            <tbody th:each="reply:${replyList.list}">-->
-<!--                                            <tr>-->
-<!--                                                <td th:text="${reply.id}"></td>-->
-<!--                                                <td th:text="${reply.username}" style="width: 80px;"></td>-->
-<!--                                                <td th:text="${reply.content}"></td>-->
-<!--                                                <td th:text="${#dates.format(reply.createTime,'yyyy-MM-dd')}"></td>-->
-<!--                                                &lt;!&ndash;                        <th th:text="${student.description}"></th>&ndash;&gt;-->
-<!--                                                <th th:text="删除" style="width: 62px;"></th>-->
-<!--                                            </tr>-->
-<!--                                            </tbody>-->
-<!--                                        </table>-->
-<!--                                        <hr>-->
-<!--                                        &lt;!&ndash;分页&ndash;&gt;-->
-<!--                                        <nav aria-label="Page navigation">-->
-<!--                                            <ul class="pagination">-->
-<!--                                                <li th:if="${replyList.hasPreviousPage}">-->
-<!--                                                    <a th:href="@{'/admin/replyInfo/?pageNum'+${(replyList.pageNum)-1}}"-->
-<!--                                                       aria-label="Previous">-->
-<!--                                                        <span aria-hidden="true">&lt;&lt;</span>-->
-<!--                                                    </a>-->
-<!--                                                </li>-->
-<!--                                                <li th:each="page : ${replyList.navigatepageNums}"-->
-<!--                                                    th:class="${replyList.pageNum == page}? 'active' : ''">-->
-
-<!--                                                    <a th:text="${page}" th:if="${replyList.pageNum == page}"></a>-->
-<!--                                                    <a th:href="@{'/admin/replyInfo/?pageNum='+${page}+'&pageSize='+${replyList.pageSize}}"-->
-<!--                                                       th:text="${page}" th:if="${replyList.pageNum != page}"></a>-->
-<!--                                                </li>-->
-
-
-<!--                                                <li th:if="${replyList.hasNextPage}">-->
-<!--                                                    <a th:href="@{'/admin/replyInfo/?pageNum='+${replyList.nextPage}+'&pageSize='+${commentList.pageSize}}"-->
-<!--                                                       aria-label="Previous">-->
-<!--                                                        <span aria-hidden="true">&gt;&gt;</span>-->
-<!--                                                    </a>-->
-<!--                                                </li>-->
-<!--                                            </ul>-->
-<!--                                        </nav>-->
-<!--                                        <hr>-->
-<!--                                    </div>-->
-<!--                                </div>-->
                             </div>
                         </div>
                     </section>

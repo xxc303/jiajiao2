@@ -85,7 +85,7 @@
                                             </thead>
                                             <tbody th:each="teacher:${pageInfo.list}">
                                             <tr>
-                                                <td th:text="${teacher.id}"></td>
+                                                <td th:text="${pageInfo.pageNum}"></td>
                                                 <td th:text="${teacher.username}" style="width: 80px;"></td>
                                                 <td th:text="${teacher.sex}"></td>
                                                 <td th:text="${teacher.age}"></td>
@@ -108,7 +108,7 @@
                                         <nav aria-label="Page navigation" style="height: 47px;margin-top: -30px;">
                                             <ul class="pagination">
                                                 <li th:if="${pageInfo.hasPreviousPage}">
-                                                    <a th:href="@{'/admin/teacherInfo/?pageNum'+${(pageInfo.pageNum)-1}}"
+                                                    <a th:href="@{'/admin/teacherInfo/?pageNum='+${(pageInfo.pageNum)-1}+'&pageSize='+${pageInfo.pageSize}}"
                                                        aria-label="Previous">
                                                         <span aria-hidden="true">&lt;&lt;</span>
                                                     </a>

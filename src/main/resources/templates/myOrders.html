@@ -173,6 +173,7 @@
                                     <tbody th:each="order,orderStat:${orders}">
                                     <tr>
                                         <td th:text="${orderStat.index+1}"></td>
+
                                         <td th:text="${order.teaName}" th:if="${type=='student'}"></td>
                                         <td th:text="${order.stuName}" th:if="${type=='teacher'}"></td>
 

@@ -79,7 +79,7 @@
                                             </thead>
                                             <tbody th:each="reply:${replyList.list}">
                                             <tr>
-                                                <td th:text="${reply.id}"></td>
+                                                <td th:text="${replyList.pageNum}"></td>
                                                 <td th:text="${reply.username}" style="width: 80px;"></td>
                                                 <td th:text="${reply.content}"></td>
                                                 <td th:text="${#dates.format(reply.createTime,'yyyy-MM-dd')}"></td>
@@ -93,7 +93,7 @@
                                         <nav aria-label="Page navigation">
                                             <ul class="pagination">
                                                 <li th:if="${replyList.hasPreviousPage}">
-                                                    <a th:href="@{'/admin/replyInfo/?pageNum'+${(replyList.pageNum)-1}}"
+                                                    <a th:href="@{'/admin/replyInfo/?pageNum='+${(replyList.pageNum)-1}+'&pageSize='+${replyList.pageSize}}"
                                                        aria-label="Previous">
                                                         <span aria-hidden="true">&lt;&lt;</span>
                                                     </a>
@@ -108,7 +108,7 @@
 
 
                                                 <li th:if="${replyList.hasNextPage}">
-                                                    <a th:href="@{'/admin/replyInfo/?pageNum='+${replyList.nextPage}+'&pageSize='+${commentList.pageSize}}"
+                                                    <a th:href="@{'/admin/replyInfo/?pageNum='+${replyList.nextPage}+'&pageSize='+${replyList.pageSize}}"
                                                        aria-label="Previous">
                                                         <span aria-hidden="true">&gt;&gt;</span>
                                                     </a>
