@@ -90,6 +90,22 @@ public class TeacherController {
     }
 
     /**
+     * 取消订单
+     */
+    @RequestMapping("/deleteOrder/{stuName}")
+    public String deleteOrder(@PathVariable("stuName") String stuName, Model model, HttpServletRequest request) {
+        Teacher teacher = (Teacher) request.getSession().getAttribute("teacher");
+        Order order = orderMapper.queryOrder(teacher.getUsername(),stuName);
+        //取消订单
+        order.setType(1);
+        orderMapper.updateOrder(order);
+        model.addAttribute("type", "teacher");
+        return "redirect:/teacher/toMyOrders";
+
+
+    }
+
+    /**
      * 预约
      */
     @RequestMapping("/teaReserve")

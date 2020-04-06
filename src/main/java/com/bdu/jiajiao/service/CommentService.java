@@ -15,4 +15,6 @@ public interface CommentService {
     List<Comment> queryAllComment(int pageNum, int pageSize);
 
     List<Reply> queryAllReply(int pageNum, int pageSize);
+
+
 }

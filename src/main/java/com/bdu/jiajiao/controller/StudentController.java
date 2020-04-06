@@ -90,15 +90,15 @@ public class StudentController {
     /**
      * 取消订单
      */
-    @RequestMapping("/deleteOrder/{teaname}")
-    public String deleteOrder(@PathVariable("teaname") String teaname, Model model, HttpServletRequest request) {
+    @RequestMapping("/deleteOrder/{teaName}")
+    public String deleteOrder(@PathVariable("teaName") String teaName, Model model, HttpServletRequest request) {
         Student student = (Student) request.getSession().getAttribute("student");
-        Order order = orderMapper.queryOrder(teaname, student.getUsername());
-        orderMapper.updateOrder();
+        Order order = orderMapper.queryOrder(teaName, student.getUsername());
+        //取消订单
+        order.setType(1);
+        orderMapper.updateOrder(order);
         model.addAttribute("type", "student");
-        return "myOrders";
-
-
+        return "redirect:/student/toMyOrders";
     }
 
     /**
@@ -233,7 +233,7 @@ public class StudentController {
         } else {
             //发布信息
             BeanUtils.copyProperties(stuPublicOrderDTO, student);
-            student.setState(1);
+            student.setStatus(1);
             studentService.addStudent(student);
         }
         return "redirect:/student/toPublicOrder";

@@ -25,4 +25,9 @@ public interface CommentMapper {
     List<Reply> queryReplyByCommentId(int commentId);
 
     List<Reply> queryAllReply();
+
+    int deleteReplyById(int id);
+
+    int deleteCommentById(int id);
+
 }

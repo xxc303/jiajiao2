@@ -96,7 +96,7 @@
                                                 <td th:text="${#dates.format(teacher.createTime,'YYYY-MM-DD')}"></td>
                                                 <!--                        <th th:text="${teacher.description}"></th>-->
                                                 <td>
-                                                    <button th:attr="del_uri=@{/deleteTea/}+${teacher.id}"
+                                                    <button th:attr="del_uri=@{/admin/deleteTea/}+${teacher.id}"
                                                             class="btn btn-sm btn-danger deleteBtn" th:text="删除"
                                                             style="width: 62px;"></button>
                                                 </td>

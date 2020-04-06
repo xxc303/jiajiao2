@@ -47,6 +47,9 @@ public class AdminController {
     @Autowired
     private CommentService commentService;
 
+    @Autowired
+    private CommentMapper commentMapper;
+
 
     /**
      * 修改密码
@@ -96,18 +99,35 @@ public class AdminController {
     }
 
     /**
+     * 评论删除
+     */
+    @RequestMapping("deleteComment/{id}")
+    public String deleteComment(Model model, @PathVariable("id") int id) {
+        commentMapper.deleteCommentById(id);
+        model.addAttribute("type", "admin");
+        return "redirect:/admin/commentInfo";
+    }
+
+    /**
      * 评论管理
      */
     @RequestMapping("/commentInfo")
     public String comment(Model model, @RequestParam(defaultValue = "1") int pageNum, @RequestParam(defaultValue = "1") int pageSize) {
         List<Comment> comments = commentService.queryAllComment(pageNum,pageSize);
-       // List<Reply> replies = commentService.queryAllReply(pageNum,pageSize);
         PageInfo<Comment> commentList = new PageInfo<>(comments);
-      //  PageInfo<Reply> replyList = new PageInfo<>(replies);
         model.addAttribute("commentList", commentList);
-       // model.addAttribute("replyList", replyList);
         model.addAttribute("type", "admin");
         return "/admin/commentInfo";
+    }
+
+    /**
+     * 回复删除
+     */
+    @RequestMapping("deleteReply/{id}")
+    public String deleteReply(Model model, @PathVariable("id") int id) {
+        commentMapper.deleteReplyById(id);
+        model.addAttribute("type", "admin");
+        return "redirect:/admin/replyInfo";
     }
 
     /**
@@ -125,21 +145,25 @@ public class AdminController {
     /**
      * 学员删除
      */
-    @DeleteMapping("deleteStu/{id}")
+    @RequestMapping("deleteStu/{id}")
     public String deleteStu(Model model, @PathVariable("id") int id) {
-        studentService.delete(id);
+        Student student = studentService.findById(id);
+        student.setStatus(0);
+        studentService.updateStudent(student);
         model.addAttribute("type", "admin");
-        return "/admin/teacherInfo";
+        return "redirect:/admin/studentInfo";
     }
 
     /**
      * 教师删除
      */
-    @DeleteMapping("/deleteTea/{id}")
+    @RequestMapping("/deleteTea/{id}")
     public String deleteTea(Model model, @PathVariable("id") int id) {
-        teacherService.delete(id);
+        Teacher teacher = teacherService.findById(id);
+        teacher.setStatus(0);
+        teacherService.updateTeacher(teacher);
         model.addAttribute("type", "admin");
-        return "/admin/studentInfo";
+        return "redirect:/admin/teacherInfo";
     }
 
     /**

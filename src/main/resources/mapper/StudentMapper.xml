@@ -37,7 +37,7 @@
         insert into jiajiao.student (username, password, item, id_number, area, address, phone, price, sex, create_time,
                                      id_requirement, detail_requirement, school, grade, score, charac,status)
         values (#{username}, #{password}, #{item}, #{idNumber}, #{area}, #{address}, #{phone}, #{price}, #{sex},
-                #{createTime}, #{idRequirement}, #{detailRequirement}, #{school}, #{grade}, #{score}, #{charac}, #{state})
+                #{createTime}, #{idRequirement}, #{detailRequirement}, #{school}, #{grade}, #{score}, #{charac}, #{status})
     </insert>
 
     <update id="updateStudent" parameterType="Student">
@@ -59,7 +59,7 @@
             grade=#{grade},
             score=#{score},
             charac=#{charac},
-            status=#{state}
+            status=#{status}
         where id = #{id}
     </update>
 

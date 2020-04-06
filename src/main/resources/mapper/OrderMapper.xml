@@ -2,8 +2,8 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.bdu.jiajiao.mapper.OrderMapper">
     <insert id="addOrder" parameterType="Order">
-        insert into jiajiao.orders (tea_name, tea_phone, stu_name, stu_phone, item, address, price, create_time)
-        values (#{teaName}, #{teaPhone}, #{stuName}, #{stuPhone}, #{item}, #{address}, #{price}, #{createTime})
+        insert into jiajiao.orders (tea_name, tea_phone, stu_name, stu_phone, item, address, price, create_time,type)
+        values (#{teaName}, #{teaPhone}, #{stuName}, #{stuPhone}, #{item}, #{address}, #{price}, #{createTime}, #{type})
     </insert>
 
     <select id="queryByTeaName" resultType="Order">
@@ -15,11 +15,20 @@
     </select>
 
     <select id="queryOrder" resultType="Order">
-        select * from jiajiao.orders where  stu_name= #{stuName} and tea_name= #{teaName}
+        select * from jiajiao.orders where stu_name= #{stuName} and tea_name= #{teaName}
     </select>
 
-    <update id="updateOrder">
+    <update id="updateOrder" parameterType="Order">
         update jiajiao.orders
-        set type = 1
+        set tea_name=#{teaName},
+            tea_phone=#{teaPhone},
+            stu_name=#{stuName},
+            stu_phone=#{stuPhone},
+            item=#{item},
+            address=#{address},
+            price=#{price},
+            create_time=#{createTime},
+            type=#{type}
+        where id = #{id}
     </update>
 </mapper>

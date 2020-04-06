@@ -36,4 +36,12 @@
     <select id="queryAllReply" resultType="Reply">
         select * from jiajiao.reply
     </select>
+
+    <delete id="deleteReplyById" parameterType="int">
+        delete from jiajiao.reply where id = #{id}
+    </delete>
+
+    <delete id="deleteCommentById" parameterType="int">
+        delete from jiajiao.comment where id = #{id}
+    </delete>
 </mapper>

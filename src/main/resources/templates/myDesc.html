@@ -160,7 +160,6 @@
                             </div>
                             <div class="card-body">
 <!--                                <c:if test="${not empty msg}"><div class="alert-${msg_type} alert">${msg}</div></c:if>-->
-                                <p>请填写详细信息.</p>
                                 <form th:action="@{'/'+${type}+'/updateUser'}" method="post">
                                     <input type="hidden" required name="id" th:value="${student.id}">
                                     <div class="form-group">

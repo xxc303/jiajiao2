@@ -88,7 +88,11 @@
                                                 <td th:text="${comment.overview}" style="width: 110px;"></td>
                                                 <td th:text="${#dates.format(comment.createTime,'yyyy-MM-dd')}"></td>
                                                 <!--                        <th th:text="${student.description}"></th>-->
-                                                <th th:text="删除" style="width: 62px;"></th>
+                                                <td>
+                                                    <button th:attr="del_uri=@{/admin/deleteComment/}+${comment.id}"
+                                                            class="btn btn-sm btn-danger deleteBtn" th:text="删除"
+                                                            style="width: 62px;"></button>
+                                                </td>
                                             </tr>
                                             </tbody>
                                         </table>
@@ -128,6 +132,9 @@
                 </div>
             </div>
         </main>
+        <form id="delete" method="post">
+            <input type="hidden" name="_method" value="delete">
+        </form>
     </div>
 </div>
 
@@ -142,6 +149,13 @@
 <script type="text/javascript" src="/js/feather.min.js"></script>
 <script>
     feather.replace()
+</script>
+
+<script>
+    $(".deleteBtn").click(function () {
+        $("#delete").attr("action", $(this).attr("del_uri")).submit();
+        return false;
+    })
 </script>
 
 <!-- Graphs -->

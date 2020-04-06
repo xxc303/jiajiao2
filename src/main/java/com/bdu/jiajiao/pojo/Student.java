@@ -175,11 +175,11 @@ public class Student {
         this.charac = charac;
     }
 
-    public int getState() {
+    public int getStatus() {
         return status;
     }
 
-    public void setState(int state) {
+    public void setStatus(int status) {
         this.status = status;
     }
 

@@ -20,7 +20,7 @@ public interface OrderMapper {
 
     Order queryOrder(String teaName,String stuName);
 
-    void updateOrder();
+    void updateOrder(Order order);
 
 
 }
