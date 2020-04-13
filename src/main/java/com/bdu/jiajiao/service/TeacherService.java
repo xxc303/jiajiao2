@@ -24,7 +24,7 @@ public interface TeacherService {
 
     int addTeacher(Teacher teacher);
 
-    List<Teacher> search(String param, int pageNum, int pageSize);
+    List<Teacher> search(String item, String area,  int pageNum, int pageSize);
 
     int delete(int id);
 }

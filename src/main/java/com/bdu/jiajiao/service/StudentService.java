@@ -25,7 +25,7 @@ public interface StudentService {
 
     int updateStudent(Student student);
 
-    List<Student> search(String param,int pageNum,int pageSize);
+    List<Student> search(String item, String area,int pageNum,int pageSize);
 
     int delete(int id);
 }

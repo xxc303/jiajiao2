@@ -55,9 +55,9 @@ public class TeacherServiceImpl implements TeacherService {
     }
 
     @Override
-    public List<Teacher> search(String param, int pageNum, int pageSize) {
+    public List<Teacher> search(String item, String area, int pageNum, int pageSize) {
         PageHelper.startPage(pageNum,pageSize);
-        List<Teacher> teacherList = teacherMapper.search(param);
+        List<Teacher> teacherList = teacherMapper.search(item,area);
         return teacherList;
     }
 

@@ -136,10 +136,11 @@ public class TeacherController {
      */
     @RequestMapping("/search")
     public String search(Model model,
-                         String param,
+                         @RequestParam String item,
+                         @RequestParam String area,
                          @RequestParam(defaultValue = "1")int pageNum,
                          @RequestParam(defaultValue = "10")int pageSize){
-        List<Teacher> teachers = teacherService.search(param, pageNum, pageSize);
+        List<Teacher> teachers = teacherService.search(item, area, pageNum, pageSize);
         PageInfo<Teacher> pageInfo = new PageInfo<>(teachers);
         model.addAttribute("pageInfo",pageInfo);
         model.addAttribute("type","teacher");

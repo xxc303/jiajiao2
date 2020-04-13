@@ -54,11 +54,16 @@
         where id = #{id}
     </update>
 
-    <select id="search" parameterType="string" resultType="Teacher">
-        select *
-        from jiajiao.teacher
-        where concat(item,area)
-        like concat('%',#{param},'%')
+    <select id="search" resultType="Teacher">
+        select * from jiajiao.teacher
+        <where>
+            <if test="item != ''">
+                item like concat('%', #{item}, '%')
+            </if>
+            <if test="area != ''">
+                or area like concat('%', #{area}, '%')
+            </if>
+        </where>
     </select>
 
     <select id="findByToken" resultType="Teacher">

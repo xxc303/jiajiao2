@@ -26,7 +26,7 @@ public interface TeacherMapper {
 
     Teacher findByToken(String token);
 
-    List<Teacher> search(@Param("param")String param);
+    List<Teacher> search(@Param("item") String item, @Param("area") String area);
 
     int delete(@Param(value = "id") int id);
 }

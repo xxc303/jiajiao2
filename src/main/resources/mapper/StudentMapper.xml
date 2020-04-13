@@ -69,11 +69,16 @@
         where id_number = #{idNumber}
     </select>
 
-    <select id="search" parameterType="string" resultType="Student">
-        select *
-        from jiajiao.student
-        where concat(item,area)
-        like concat('%',#{param},'%')
+    <select id="search" resultType="Student">
+        select * from jiajiao.student
+        <where>
+            <if test="item != ''">
+                item like concat('%', #{item}, '%')
+            </if>
+            <if test="area != ''">
+                or area like concat('%', #{area}, '%')
+            </if>
+        </where>
     </select>
 
     <delete id="delete">

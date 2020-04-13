@@ -64,9 +64,9 @@ public class StudentServiceImpl implements StudentService {
     }
 
     @Override
-    public List<Student> search(String param, int pageNum, int pageSize) {
+    public List<Student> search(String item, String area, int pageNum, int pageSize) {
         PageHelper.startPage(pageNum,pageSize);
-        List<Student> studentList = studentMapper.search(param);
+        List<Student> studentList = studentMapper.search(item, area);
         return studentList;
     }
 

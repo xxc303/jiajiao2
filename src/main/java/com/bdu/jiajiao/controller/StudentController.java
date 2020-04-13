@@ -129,15 +129,13 @@ public class StudentController {
         return ResultDTO.okOf();
     }
 
-    /**
-     * 查询
-     */
     @PostMapping("/search")
     public String search(Model model,
-                         @RequestParam(value = "param") String param,
+                         @RequestParam(value = "item") String item,
+                         @RequestParam(value = "area") String area,
                          @RequestParam(defaultValue = "1") int pageNum,
                          @RequestParam(defaultValue = "10") int pageSize) {
-        List<Student> students = studentService.search(param, pageNum, pageSize);
+        List<Student> students = studentService.search(item, area, pageNum, pageSize);
         PageInfo<Student> pageInfo = new PageInfo<>(students);
         model.addAttribute("pageInfo", pageInfo);
         model.addAttribute("type", "student");

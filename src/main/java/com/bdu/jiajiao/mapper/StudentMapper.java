@@ -28,7 +28,7 @@ public interface StudentMapper {
 
     Student queryStudentByIdNumber(@Param("idNumber") String idNumber);
 
-    List<Student> search(@Param("param") String param);
+    List<Student> search(@Param("item") String item, @Param("area") String area);
 
     int delete(@Param("id") int id);
 }
