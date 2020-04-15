@@ -105,14 +105,14 @@
                 <div class="panel-heading">
                     <h3 class="panel-title"><strong><span th:text="'家教'+${article1.creator}+'的文章专栏'"></span></strong></h3>
                 </div>
-                <div class="panel-body" style="padding-bottom: 500px;">
+                <div class="panel-body">
                     <h4><strong><span th:text="${article1.title}"
                                       style="text-align: center;display: block"></span></strong></h4>
                     <h5><span class="pull-right"
                               th:text="'发表于：'+${#dates.format(article1.createTime,'yyyy-MM-dd')}"></span></h5>
                     <br>
                     <hr>
-                    <p th:text="${article1.content}"></p>
+                    <textarea th:text="${article1.content}" style="height:600px; width:100%;border: 0;"></textarea>
                 </div>
             </div>
         </div>

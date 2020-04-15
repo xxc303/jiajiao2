@@ -129,15 +129,22 @@ public class StudentController {
         return ResultDTO.okOf();
     }
 
+    /**
+     * 搜索功能
+     */
     @PostMapping("/search")
     public String search(Model model,
-                         @RequestParam(value = "item") String item,
-                         @RequestParam(value = "area") String area,
+                         String item,String area,
                          @RequestParam(defaultValue = "1") int pageNum,
                          @RequestParam(defaultValue = "10") int pageSize) {
         List<Student> students = studentService.search(item, area, pageNum, pageSize);
         PageInfo<Student> pageInfo = new PageInfo<>(students);
+
+        List<Article> articleList = articleMapper.queryAllStuArticle();
+        List<Student> studentsInfo = studentMapper.queryStudentsInfo();
         model.addAttribute("pageInfo", pageInfo);
+        model.addAttribute("articleList",articleList);
+        model.addAttribute("studentsInfo",studentsInfo);
         model.addAttribute("type", "student");
         return "student";
     }
@@ -253,10 +260,12 @@ public class StudentController {
     @RequestMapping("/toDetail/{id}")
     public String todetail(Model model, @PathVariable(name = "id") int id) {
         Student student = studentMapper.queryStudentById(id);
-
         List<Article> articleList = articleMapper.queryAllStuArticle();
+        List<Student> studentsInfo = studentMapper.queryStudentsInfo();
+
         model.addAttribute("student", student);
         model.addAttribute("articleList", articleList);
+        model.addAttribute("studentsInfo", studentsInfo);
         return "studentDetail";
     }
 
@@ -347,9 +356,11 @@ public class StudentController {
         PageInfo<Student> pageInfo = new PageInfo<>(studentsList);
 
         List<Article> articleList = articleMapper.queryAllStuArticle();
+        List<Student> studentsInfo = studentMapper.queryStudentsInfo();
         model.addAttribute("pageInfo", pageInfo);
         model.addAttribute("type", "student");
         model.addAttribute("articleList", articleList);
+        model.addAttribute("studentsInfo",studentsInfo);
         return "student";
     }
 

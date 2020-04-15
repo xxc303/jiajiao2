@@ -106,7 +106,7 @@
                     <ul>
                         <div style="background-color: rgb(246,248,250);padding-bottom:2px;margin-left: -45px;">
                             <h1>
-                                <span class="media-heading" th:text="${student.address}+${student.username}+'找家教'"></span></h3>
+                                <span class="media-heading" th:text="${student.address}+${student.username}+'找家教'" style="padding-left: 8px;"></span></h3>
                             </h1>
                             <p>
                                 <span class="text_left" style="font-size: 13px">发布者:</span> <span class="text_right"th:text="${student.username}"style="font-size: 13px;color: rgb(164,168,178);">家长/学员</span>
@@ -182,12 +182,11 @@
             <ul class="list-group">
                 <li class="list-group-item">
                     <div class="list-group">
-                        <strong><h4 class="list-group-title">成功案例</h4></strong>
-                        <a type="button" class="list-group-item">张奇： 天津大学张同学教学案例</a>
-                        <a type="button" class="list-group-item">吕老师： 哈尔滨工程大学刘同学教学案例</a>
-                        <a type="button" class="list-group-item">王老师： 35中周同学教学案例</a>
-                        <a type="button" class="list-group-item">李锐： 北大附中叶同学教学案例</a>
-                        <a type="button" class="list-group-item">马教员： 上海杨浦小学梓欣同学教学案例</a>
+                        <strong><h4 class="list-group-title">最新招聘信息</h4></strong>
+                        <div type="button" class="list-group-item" th:each="studentInfo : ${studentsInfo}">
+                            <a th:href="'/student/toDetail/'+${studentInfo.id}" th:text="${studentInfo.address}+${studentInfo.username}+'招'+${studentInfo.item}+'家教'" style="display: block;height: 10px;width: 200px"></a>
+                            <span style="padding-left: 225px;" th:text="${#dates.format(studentInfo.createTime,'MM-dd')}"></span>
+                        </div>
                     </div>
                 </li>
                 <li class="list-group-item">

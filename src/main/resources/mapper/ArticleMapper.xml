@@ -9,13 +9,13 @@
     <select id="queryAllTeaArticle" resultType="Article">
         select *
         from jiajiao.article
-        where type = 1
+        where type = 1 order by id desc limit 5
     </select>
 
     <select id="queryAllStuArticle" resultType="Article">
         select *
         from jiajiao.article
-        where type = 3
+        where type = 3 order by id desc limit 5
     </select>
 
     <select id="queryByName" resultType="Article">

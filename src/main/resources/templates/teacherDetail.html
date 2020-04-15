@@ -230,18 +230,19 @@
                 <li class="list-group-item">
                     <div class="list-group">
                         <strong><h4 class="list-group-title">成功案例</h4></strong>
-                        <a type="button" class="list-group-item">张奇： 天津大学张同学教学案例</a>
-                        <a type="button" class="list-group-item">吕老师： 哈尔滨工程大学刘同学教学案例</a>
-                        <a type="button" class="list-group-item">王老师： 35中周同学教学案例</a>
-                        <a type="button" class="list-group-item">李锐： 北大附中叶同学教学案例</a>
-                        <a type="button" class="list-group-item">马教员： 上海杨浦小学梓欣同学教学案例</a>
+                        <div type="button" class="list-group-item" th:each="orderInfo : ${ordersInfo}">
+                            <a th:text="${orderInfo.teaName}+'预约了'+${orderInfo.address}+${orderInfo.stuName}"
+                               style="display: block;height: 12px;width: 180px;cursor: pointer;"></a>
+                            <span style="padding-left: 207px;"
+                                  th:text="${#dates.format(orderInfo.createTime,'yyyy-MM-dd')}"></span>
+                        </div>
                     </div>
                 </li>
                 <li class="list-group-item">
                     <div class="list-group" >
                         <strong><h4 class="list-group-title">热门文章</h4></strong>
                         <div type="button" class="list-group-item" th:each="article : ${articleList}">
-                            <a th:href="@{'/teacher/toDetail/'+${article.creatorId}}"><span class="article" th:text="${article.creator}+':'" style="display: inline-block;width: 50px"></span></a>
+                            <a th:href="@{'/teacher/toDetail/'+${article.creatorId}}"><span class="article" th:text="${article.creator}+'：'" style="display: inline-block;width: 50px"></span></a>
                             <a th:href="@{'/teacher/article/'+${article.id}}"><span class="article" th:text="${article.title}"></span></a>
                         </div>
                     </div>

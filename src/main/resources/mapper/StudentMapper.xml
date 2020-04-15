@@ -63,12 +63,6 @@
         where id = #{id}
     </update>
 
-    <select id="queryStudentByIdNumber" resultType="Student">
-        select *
-        from jiajiao.student
-        where id_number = #{idNumber}
-    </select>
-
     <select id="search" resultType="Student">
         select * from jiajiao.student
         <where>
@@ -78,10 +72,21 @@
             <if test="area != ''">
                 or area like concat('%', #{area}, '%')
             </if>
+            and status != 0
         </where>
+    </select>
+
+    <select id="queryStudentByIdNumber" resultType="Student">
+        select *
+        from jiajiao.student
+        where id_number = #{idNumber}
     </select>
 
     <delete id="delete">
         delete * from jiajiao.student where id = #{id}
     </delete>
+
+    <select id="queryStudentsInfo" resultType="Student">
+        select id, address, username,item, create_time from jiajiao.student limit 4
+    </select>
 </mapper>

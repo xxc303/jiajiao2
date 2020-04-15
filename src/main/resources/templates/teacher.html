@@ -101,7 +101,7 @@
         <div class="row">
             <div class="col-lg-8 col-md-12 col-sm-12 col-xs-12">
                 <hr>
-                <div class="media" th:each="teacher : ${pageInfo.list}">
+                <div class="media" th:each="teacher : ${pageInfo.list}" style="padding: 15px 10px;margin-top: 0;">
                     <div class="media-left media-middle">
                         <div>
                             <a href="#">
@@ -109,10 +109,10 @@
                             </a>
                         </div>
                         <div class="btn-group" role="group" aria-label="...">
-                            <a href="#"><button type="button" class="btn btn-default">联系老师</button></a>
+                            <a th:href="'/teacher/toDetail/'+${teacher.id}"><button type="button" class="btn btn-default" style="margin-left: 10px;">联系老师</button></a>
                         </div>
                     </div>
-                <div class="media-body " >
+                <div class="media-body">
                     <a th:href="'/teacher/toDetail/'+${teacher.id}"><h4 class="media-heading" th:text="${teacher.title}"></h4></a>
                     <span th:text="${#dates.format(teacher.createTime,'yyyy-MM-dd')}+'发布'" style="float: right"></span>
                     <br>
@@ -127,7 +127,6 @@
                         <span class="text_left">个人简介：</span> <span class="text_right text_desc" th:text="${teacher.description}"></span><a th:href="'/teacher/toDetail/'+${teacher.id}" style="color: green;">[更多]</a>
                     </span>
                 </div>
-                    <hr>
             </div>
                 <!--分页-->
                 <nav aria-label="Page navigation">
@@ -161,11 +160,12 @@
                     <li class="list-group-item">
                         <div class="list-group">
                             <strong><h4 class="list-group-title">成功案例</h4></strong>
-                            <a type="button" class="list-group-item">张奇： 天津大学张同学教学案例</a>
-                            <a type="button" class="list-group-item">吕老师： 哈尔滨工程大学刘同学教学案例</a>
-                            <a type="button" class="list-group-item">王老师： 35中周同学教学案例</a>
-                            <a type="button" class="list-group-item">李锐： 北大附中叶同学教学案例</a>
-                            <a type="button" class="list-group-item">马教员： 上海杨浦小学梓欣同学教学案例</a>
+                            <div type="button" class="list-group-item" th:each="orderInfo : ${ordersInfo}">
+                                <a th:text="${orderInfo.teaName}+'预约了'+${orderInfo.address}+${orderInfo.stuName}"
+                                   style="display: block;height: 12px;width: 180px;cursor: pointer;"></a>
+                                <span style="padding-left: 207px;"
+                                      th:text="${#dates.format(orderInfo.createTime,'yyyy-MM-dd')}"></span>
+                            </div>
                         </div>
                     </li>
 

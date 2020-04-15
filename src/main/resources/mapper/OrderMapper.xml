@@ -31,4 +31,8 @@
             type=#{type}
         where id = #{id}
     </update>
+
+    <select id="queryOrderInfo" resultType="Order">
+        select id, tea_name, stu_name, address,create_time from jiajiao.orders where type = 0 limit 5
+    </select>
 </mapper>

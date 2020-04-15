@@ -127,6 +127,7 @@ function reserve() {
         success: function (response) {
             console.log(response);
             if (response.code === 200) {
+                alert("预约成功！")
                 window.location.reload();
 
             } else if (response.code === 500) {
@@ -150,6 +151,7 @@ function teaReserve() {
         success: function (response) {
             console.log(response);
             if (response.code === 200) {
+                alert("预约成功");
                 window.location.reload();
 
             } else if (response.code === 500) {

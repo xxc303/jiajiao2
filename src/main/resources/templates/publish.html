@@ -159,13 +159,13 @@
 <!--                <input type="hidden" name="id" th:value="${id}">-->
                 <div class="form-group">
                     <label for="title">分享标题（简单扼要）:</label>
-                    <input type="text" class="form-control" th:value="${title}" id="title" name="title"
+                    <input type="text" class="form-control" th:value="${title}" required id="title" name="title"
                            placeholder="问题标题……"
                            autocomplete="off">
                 </div>
                 <div class="form-group" id="question-editor">
                     <label for="content">内容补充 </label>
-                    <textarea name="content" id="content" th:text="${content}" style="display:none;"
+                    <textarea name="content" id="content" th:text="${content}" required style="display:none;"
                               class="form-control"
                               cols="30"
                               rows="10"></textarea>
@@ -184,9 +184,6 @@
                             imageUploadURL: "/file/upload",
                         });
                     });
-                    $(function () {
-                        success()
-                    })
                 </script>
                 <div class="container-fluid main ">
                     <div class="row">
@@ -196,6 +193,7 @@
                     </div>
                 </div>
             </form>
+            <span th:if="${not #strings.isEmpty(msg)}"><div class="alert alert-success" role="alert" th:text="${msg}" style="font-size: 18px"></div></span>
         </div>
     </div>
 </div>

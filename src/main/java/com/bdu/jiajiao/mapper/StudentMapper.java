@@ -31,4 +31,6 @@ public interface StudentMapper {
     List<Student> search(@Param("item") String item, @Param("area") String area);
 
     int delete(@Param("id") int id);
+
+    List<Student> queryStudentsInfo();
 }

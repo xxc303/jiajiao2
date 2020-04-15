@@ -22,5 +22,7 @@ public interface OrderMapper {
 
     void updateOrder(Order order);
 
+    List<Order> queryOrderInfo();
+
 
 }

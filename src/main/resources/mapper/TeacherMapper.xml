@@ -63,6 +63,7 @@
             <if test="area != ''">
                 or area like concat('%', #{area}, '%')
             </if>
+            and status != 0
         </where>
     </select>
 

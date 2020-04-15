@@ -13,6 +13,7 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -67,7 +68,7 @@ public class TeacherController {
     }
 
     /**
-     * 分享功能
+     * 分享文章功能
      * @param model
      * @return
      */
@@ -78,14 +79,15 @@ public class TeacherController {
     }
 
     @RequestMapping("/publish")
-    public String publish(Article article, Model model, HttpServletRequest request){
+    public String publish(Article article, Model model, HttpServletRequest request,RedirectAttributes modelMap){
         Teacher teacher = (Teacher) request.getSession().getAttribute("teacher");
-        article.setCreator(teacher.getUsername());
-        article.setCreatorId(teacher.getId());
-        article.setCreateTime(new Date());
-        article.setType(1);
+            article.setCreator(teacher.getUsername());
+            article.setCreatorId(teacher.getId());
+            article.setCreateTime(new Date());
+            article.setType(1);
         articleMapper.addArticle(article);
         model.addAttribute("type", "teacher");
+        modelMap.addFlashAttribute("msg","发布成功");
         return "redirect:/teacher/toPublish";
     }
 
@@ -136,15 +138,19 @@ public class TeacherController {
      */
     @RequestMapping("/search")
     public String search(Model model,
-                         @RequestParam String item,
-                         @RequestParam String area,
+                         String item,String area,
                          @RequestParam(defaultValue = "1")int pageNum,
                          @RequestParam(defaultValue = "10")int pageSize){
         List<Teacher> teachers = teacherService.search(item, area, pageNum, pageSize);
         PageInfo<Teacher> pageInfo = new PageInfo<>(teachers);
+
+        List<Article> articleList = articleMapper.queryAllTeaArticle();
+        List<Order> ordersInfo = orderMapper.queryOrderInfo();
         model.addAttribute("pageInfo",pageInfo);
         model.addAttribute("type","teacher");
         model.addAttribute("search","search");
+        model.addAttribute("articleList",articleList);
+        model.addAttribute("ordersInfo",ordersInfo);
         return "teacher";
     }
     /**
@@ -262,13 +268,14 @@ public class TeacherController {
         String[] items = teacher.getItem().trim().split(" ");
         List<Comment> comments = commentMapper.queryCommentByParentId(id);
         int counts = commentMapper.countComment(id);
-
         List<Article> articleList = articleMapper.queryAllTeaArticle();
+        List<Order> ordersInfo = orderMapper.queryOrderInfo();
         model.addAttribute("items", items);
         model.addAttribute("teacher", teacher);
         model.addAttribute("comments", comments);
         model.addAttribute("count", counts);
         model.addAttribute("articleList", articleList);
+        model.addAttribute("ordersInfo",ordersInfo);
         return "teacherDetail";
     }
 
@@ -364,8 +371,10 @@ public class TeacherController {
         PageInfo<Teacher> pageInfo = new PageInfo<>(teachersList);
 
         List<Article> articleList = articleMapper.queryAllTeaArticle();
+        List<Order> ordersInfo = orderMapper.queryOrderInfo();
         model.addAttribute("pageInfo", pageInfo);
         model.addAttribute("articleList", articleList);
+        model.addAttribute("ordersInfo",ordersInfo);
         model.addAttribute("type", "teacher");
         return "teacher";
     }
