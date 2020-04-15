@@ -174,19 +174,19 @@
                                     <tr>
                                         <td th:text="${orderStat.index+1}" style="line-height: 30px;"></td>
 
-                                        <td th:text="${order.teaName}" th:if="${type=='student'}" style="line-height: 30px;"></td>
-                                        <td th:text="${order.stuName}" th:if="${type=='teacher'}" style="line-height: 30px;"></td>
+                                        <td th:text="${order.teacherName}" th:if="${type=='student'}" style="line-height: 30px;"></td>
+                                        <td th:text="${order.studentName}" th:if="${type=='teacher'}" style="line-height: 30px;"></td>
 
-                                        <td th:text="${order.teaPhone}" th:if="${type=='student'}" style="line-height: 30px;"></td>
-                                        <td th:text="${order.stuPhone}" th:if="${type=='teacher'}" style="line-height: 30px;"></td>
+                                        <td th:text="${order.teacherPhone}" th:if="${type=='student'}" style="line-height: 30px;"></td>
+                                        <td th:text="${order.studentPhone}" th:if="${type=='teacher'}" style="line-height: 30px;"></td>
                                         <td th:text="${order.item}" style="line-height: 30px;"></td>
                                         <td th:text="${order.address}" style="line-height: 30px;"></td>
                                         <td th:text="${order.price}" style="line-height: 30px;"></td>
                                         <!--                        <th th:text="${student.description}"></th>-->
 <!--                                        <th th:text="删除" style="width: 62px"></th>-->
                                         <td>
-                                            <button th:if="${type=='student'}" th:attr="del_uri=@{/student/deleteOrder/}+${order.teaName}" class="btn btn-sm btn-danger deleteBtn" th:text="删除" style="width: 62px;"></button>
-                                            <button th:if="${type=='teacher'}" th:attr="del_uri=@{/teacher/deleteOrder/}+${order.stuName}" class="btn btn-sm btn-danger deleteBtn" th:text="删除" style="width: 62px;"></button>
+                                            <button th:if="${type=='student'}" th:attr="del_uri=@{/student/deleteOrder/}+${order.teacherName}" class="btn btn-sm btn-danger deleteBtn" th:text="删除" style="width: 62px;"></button>
+                                            <button th:if="${type=='teacher'}" th:attr="del_uri=@{/teacher/deleteOrder/}+${order.studentName}" class="btn btn-sm btn-danger deleteBtn" th:text="删除" style="width: 62px;"></button>
                                         </td>
                                     </tr>
                                     </tbody>

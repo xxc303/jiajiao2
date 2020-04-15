@@ -94,44 +94,57 @@ public class TeacherController {
     /**
      * 取消订单
      */
-    @RequestMapping("/deleteOrder/{stuName}")
-    public String deleteOrder(@PathVariable("stuName") String stuName, Model model, HttpServletRequest request) {
+    @RequestMapping("/deleteOrder/{studentName}")
+    public String deleteOrder(@PathVariable("studentName") String studentName, Model model, HttpServletRequest request) {
         Teacher teacher = (Teacher) request.getSession().getAttribute("teacher");
-        Order order = orderMapper.queryOrder(teacher.getUsername(),stuName);
+        Order order = orderMapper.queryOrder(teacher.getUsername(),studentName);
         //取消订单
         order.setType(1);
         orderMapper.updateOrder(order);
         model.addAttribute("type", "teacher");
         return "redirect:/teacher/toMyOrders";
-
-
     }
 
     /**
      * 预约
      */
+    @ResponseBody
     @RequestMapping("/teaReserve")
-    public Object teaReserve(@RequestBody OrderDTO orderDTO,
-                             HttpServletRequest request){
-        Student studentdb = studentService.findById(orderDTO.getStudentId());
-        Student student = (Student) request.getSession().getAttribute("student");
-        Teacher teacher = (Teacher) request.getSession().getAttribute("teacher");
-        if (student == null && teacher == null) {
-            return ResultDTO.errorOf(500, "请登录");
-        }
+    public Object teaReserve(@RequestBody OrderDTO orderDTO){
         Order order = new Order();
-        order.setTeaName(teacher.getUsername());
-        order.setTeaPhone(teacher.getPhone());
-        order.setStuName(studentdb.getUsername());
-        order.setStuPhone(studentdb.getPhone());
-        order.setItem(studentdb.getItem());
-        order.setAddress(studentdb.getAddress());
-        order.setPrice(studentdb.getPrice());
+        BeanUtils.copyProperties(orderDTO, order);
         order.setCreateTime(new Date());
         order.setType(0);
-        orderMapper.addOrder(order);
-        return ResultDTO.okOf();
+        int count = orderMapper.addOrder(order);
+        if(count < 0){
+            return ResultDTO.errorOf(500, "预约失败！");
+        }else {
+            return ResultDTO.okOf();
+        }
     }
+    //@RequestMapping("/teaReserve")
+    //public Object teaReserve(@RequestBody OrderDTO orderDTO,
+    //                         HttpServletRequest request){
+    //    Student studentdb = studentService.findById(orderDTO.getStudentId());
+    //    Student student = (Student) request.getSession().getAttribute("student");
+    //    Teacher teacher = (Teacher) request.getSession().getAttribute("teacher");
+    //    if (student == null && teacher == null) {
+    //        return ResultDTO.errorOf(500, "请登录");
+    //    }
+    //    Order order = new Order();
+    //    order.setTeaName(teacher.getUsername());
+    //    order.setTeaPhone(teacher.getPhone());
+    //    order.setStuName(studentdb.getUsername());
+    //    order.setStuPhone(studentdb.getPhone());//
+    //    order.setItem(studentdb.getItem());//
+    //    order.setAddress(studentdb.getAddress());//
+    //    order.setPrice(studentdb.getPrice());
+    //    order.setCreateTime(new Date());
+    //    order.setType(0);
+    //    orderMapper.addOrder(order);
+    //    return ResultDTO.okOf();
+    //}
+
 
     /**
      * 查询

@@ -161,7 +161,7 @@
                         <div class="list-group">
                             <strong><h4 class="list-group-title">成功案例</h4></strong>
                             <div type="button" class="list-group-item" th:each="orderInfo : ${ordersInfo}">
-                                <a th:text="${orderInfo.teaName}+'预约了'+${orderInfo.address}+${orderInfo.stuName}"
+                                <a th:text="${orderInfo.teacherName}+'预约了'+${orderInfo.address}+${orderInfo.studentName}"
                                    style="display: block;height: 12px;width: 180px;cursor: pointer;"></a>
                                 <span style="padding-left: 207px;"
                                       th:text="${#dates.format(orderInfo.createTime,'yyyy-MM-dd')}"></span>

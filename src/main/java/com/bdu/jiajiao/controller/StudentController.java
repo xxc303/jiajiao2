@@ -90,10 +90,10 @@ public class StudentController {
     /**
      * 取消订单
      */
-    @RequestMapping("/deleteOrder/{teaName}")
-    public String deleteOrder(@PathVariable("teaName") String teaName, Model model, HttpServletRequest request) {
+    @RequestMapping("/deleteOrder/{teacherName}")
+    public String deleteOrder(@PathVariable("teacherName") String teacherName, Model model, HttpServletRequest request) {
         Student student = (Student) request.getSession().getAttribute("student");
-        Order order = orderMapper.queryOrder(teaName, student.getUsername());
+        Order order = orderMapper.queryOrder(teacherName, student.getUsername());
         //取消订单
         order.setType(1);
         orderMapper.updateOrder(order);
@@ -106,27 +106,15 @@ public class StudentController {
      */
     @ResponseBody
     @RequestMapping(value = "/reserve", method = RequestMethod.POST)
-    public Object reserve(@RequestBody OrderDTO orderDTO,
-                          HttpServletRequest request) {
-        //通过前端传id查询老师
-        Teacher teacherdb = teacherService.findById(orderDTO.getTeacherId());
-        Student student = (Student) request.getSession().getAttribute("student");
-        Teacher teacher = (Teacher) request.getSession().getAttribute("teacher");
-        if (student == null && teacher == null) {
-            return ResultDTO.errorOf(500, "请登录");
-        }
-        Order order = new Order();
-        order.setTeaName(teacherdb.getUsername());
-        order.setTeaPhone(teacherdb.getPhone());
-        order.setStuName(student.getUsername());
-        order.setStuPhone(student.getPhone());
-        order.setItem(student.getItem());
-        order.setAddress(student.getAddress());
-        order.setPrice(student.getPrice());
+    public Object reserve(@RequestBody Order order){
         order.setCreateTime(new Date());
         order.setType(0);
-        orderMapper.addOrder(order);
-        return ResultDTO.okOf();
+        int i = orderMapper.addOrder(order);
+        if (i < 0){
+            return ResultDTO.errorOf(500,"预约失败！");
+        }else {
+            return ResultDTO.okOf();
+        }
     }
 
     /**

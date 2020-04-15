@@ -14,11 +14,11 @@ public interface OrderMapper {
 
     int addOrder(Order order);
 
-    List<Order> queryByTeaName(String teaName);
+    List<Order> queryByTeaName(String teacherName);
 
-    List<Order> queryByStuName(String stuName);
+    List<Order> queryByStuName(String studentName);
 
-    Order queryOrder(String teaName,String stuName);
+    Order queryOrder(String teacherName,String studentName);
 
     void updateOrder(Order order);
 

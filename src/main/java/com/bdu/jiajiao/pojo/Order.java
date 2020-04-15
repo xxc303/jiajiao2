@@ -10,10 +10,10 @@ import java.util.Date;
 public class Order {
 
     private int id;
-    private String teaName;//家教姓名
-    private String teaPhone;//家教电话
-    private String stuName;
-    private String stuPhone;
+    private String teacherName;//家教姓名
+    private String teacherPhone;//家教电话
+    private String studentName;
+    private String studentPhone;
     private String item;//学员item
     private String address;//辅导地址-学员地址
     private String price;
@@ -28,36 +28,36 @@ public class Order {
         this.id = id;
     }
 
-    public String getTeaName() {
-        return teaName;
+    public String getTeacherName() {
+        return teacherName;
     }
 
-    public void setTeaName(String teaName) {
-        this.teaName = teaName;
+    public void setTeacherName(String teacherName) {
+        this.teacherName = teacherName;
     }
 
-    public String getTeaPhone() {
-        return teaPhone;
+    public String getTeacherPhone() {
+        return teacherPhone;
     }
 
-    public void setTeaPhone(String teaPhone) {
-        this.teaPhone = teaPhone;
+    public void setTeacherPhone(String teacherPhone) {
+        this.teacherPhone = teacherPhone;
     }
 
-    public String getStuName() {
-        return stuName;
+    public String getStudentName() {
+        return studentName;
     }
 
-    public void setStuName(String stuName) {
-        this.stuName = stuName;
+    public void setStudentName(String studentName) {
+        this.studentName = studentName;
     }
 
-    public String getStuPhone() {
-        return stuPhone;
+    public String getStudentPhone() {
+        return studentPhone;
     }
 
-    public void setStuPhone(String stuPhone) {
-        this.stuPhone = stuPhone;
+    public void setStudentPhone(String studentPhone) {
+        this.studentPhone = studentPhone;
     }
 
     public String getItem() {
@@ -104,10 +104,10 @@ public class Order {
     public String toString() {
         return "Order{" +
                 "id=" + id +
-                ", teaName='" + teaName + '\'' +
-                ", teaPhone='" + teaPhone + '\'' +
-                ", stuName='" + stuName + '\'' +
-                ", stuPhone='" + stuPhone + '\'' +
+                ", teacherName='" + teacherName + '\'' +
+                ", teacherPhone='" + teacherPhone + '\'' +
+                ", studentName='" + studentName + '\'' +
+                ", studentPhone='" + studentPhone + '\'' +
                 ", item='" + item + '\'' +
                 ", address='" + address + '\'' +
                 ", price='" + price + '\'' +

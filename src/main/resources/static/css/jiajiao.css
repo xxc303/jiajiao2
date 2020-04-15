@@ -180,3 +180,9 @@ p{
     -webkit-line-clamp: 3;
     overflow: hidden;
 }
+
+.dropdown-li{
+    /*padding: 10px;*/
+    /*padding-left: 20px;*/
+    /*font-size: 16px;*/
+}

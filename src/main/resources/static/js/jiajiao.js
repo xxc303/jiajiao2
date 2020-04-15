@@ -23,9 +23,11 @@ function post() {
 
             } else if (response.code === 500) {
                 alert(response.message);
+                window.location.href = "http://localhost:8081";
             } else (response.code == 501)
             {
                 alert(response.message);
+                window.location.href = "http://localhost:8081";
             }
         },
         dataType: "json"
@@ -89,6 +91,9 @@ function collapseComments(e) {
 function reply(e) {
     var commentId = e.getAttribute("data-id");
     var content = $("#input-" + commentId).val();
+    if (!content){
+        alert("回复内容不能为空！")
+    }
     $.ajax({
         type: "post",
         url: "/reply",
@@ -103,7 +108,11 @@ function reply(e) {
                 window.location.reload();
 
             } else if (response.code === 500) {
-                alert(response.message);
+               var isAccepted = confirm(response.message);
+               if (isAccepted){
+                   window.open("http://localhost:8081");
+                   window.localStorage.setItem("closable",true);
+               }
             }
         },
         dataType: "json"
@@ -115,23 +124,41 @@ function reply(e) {
  * 预约功能
  */
 function reserve() {
-    var teacherId = $("#teacher_id").val();
-    console.log(teacherId);
+    var studentName = $("#modal_student_name").text();
+    var price = $("#modal_price").text();
+    var item = $("#modal_item").text();
+    var teacherName = $("#modal_teacher_name").val();
+    var teacherPhone = $("#modal_teacher_phone").val();
+    var studentPhone = $("#modal_student_phone").val();
+    var address = $("#modal_address").val();
+    console.log(studentName);
+    console.log(price);
+    console.log(item);
+    console.log(teacherName);
+    console.log(teacherPhone);
+    console.log(studentPhone);
+    console.log(address);
     $.ajax({
         type: "post",
         url: "/student/reserve",
         contentType: "application/json",
         data: JSON.stringify({
-            "teacherId": teacherId
+            "studentName": studentName,
+            "price": price,
+            "item": item,
+            "teacherName": teacherName,
+            "teacherPhone": teacherPhone,
+            "studentPhone": studentPhone,
+            "address": address
         }),
         success: function (response) {
             console.log(response);
             if (response.code === 200) {
-                alert("预约成功！")
                 window.location.reload();
+                alert("预约成功！")
 
             } else if (response.code === 500) {
-                alert("请先登录！");
+                alert(response.message);
             }
         },
         dataType: "json"
@@ -139,23 +166,33 @@ function reserve() {
 }
 
 function teaReserve() {
-    var studentId = $("#student_id").val();
-    console.log(studentId);
+    var teacherName = $("#modal_teacher_name").text();
+    var price = $("#modal_teacher_price").text();
+    var item = $("#modal_item").val();
+    var studentName = $("#modal_student_name").val();
+    var teacherPhone = $("#modal_teacher_phone").val();
+    var studentPhone = $("#modal_student_phone").val();
+    var address = $("#modal_address").val();
     $.ajax({
         type: "post",
         url: "/teacher/teaReserve",
         contentType: "application/json",
         data: JSON.stringify({
-            "studentId": studentId
+            "teacherName": teacherName,
+            "price": price,
+            "item": item,
+            "studentName": studentName,
+            "teacherPhone": teacherPhone,
+            "studentPhone": studentPhone,
+            "address": address
         }),
         success: function (response) {
             console.log(response);
             if (response.code === 200) {
-                alert("预约成功");
                 window.location.reload();
-
+                alert("预约成功！");
             } else if (response.code === 500) {
-                alert("请先登录！");
+                alert(response.message);
             }
         },
         dataType: "json"

@@ -2,28 +2,28 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.bdu.jiajiao.mapper.OrderMapper">
     <insert id="addOrder" parameterType="Order">
-        insert into jiajiao.orders (tea_name, tea_phone, stu_name, stu_phone, item, address, price, create_time,type)
-        values (#{teaName}, #{teaPhone}, #{stuName}, #{stuPhone}, #{item}, #{address}, #{price}, #{createTime}, #{type})
+        insert into jiajiao.orders (teacher_name, teacher_phone, student_name, student_phone, item, address, price, create_time,type)
+        values (#{teacherName}, #{teacherPhone}, #{studentName}, #{studentPhone}, #{item}, #{address}, #{price}, #{createTime}, #{type})
     </insert>
 
     <select id="queryByTeaName" resultType="Order">
-        select * from jiajiao.orders where  tea_name= #{teaName} and type = 0
+        select * from jiajiao.orders where  teacher_name= #{teacherName} and type = 0
     </select>
 
     <select id="queryByStuName" resultType="Order">
-        select * from jiajiao.orders where  stu_name= #{stuName} and type = 0
+        select * from jiajiao.orders where  student_name= #{studentName} and type = 0
     </select>
 
     <select id="queryOrder" resultType="Order">
-        select * from jiajiao.orders where stu_name= #{stuName} and tea_name= #{teaName}
+        select * from jiajiao.orders where student_name= #{studentName} and teacher_name= #{teacherName} and type = 0
     </select>
 
     <update id="updateOrder" parameterType="Order">
         update jiajiao.orders
-        set tea_name=#{teaName},
-            tea_phone=#{teaPhone},
-            stu_name=#{stuName},
-            stu_phone=#{stuPhone},
+        set teacher_name=#{teacherName},
+            teacher_phone=#{teacherPhone},
+            student_name=#{studentName},
+            student_phone=#{studentPhone},
             item=#{item},
             address=#{address},
             price=#{price},
@@ -33,6 +33,6 @@
     </update>
 
     <select id="queryOrderInfo" resultType="Order">
-        select id, tea_name, stu_name, address,create_time from jiajiao.orders where type = 0 limit 5
+        select id, teacher_name, student_name, address,create_time from jiajiao.orders where type = 0 limit 5
     </select>
 </mapper>

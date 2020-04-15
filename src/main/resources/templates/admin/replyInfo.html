@@ -77,9 +77,10 @@
                                                 <th>操作</th>
                                             </tr>
                                             </thead>
-                                            <tbody th:each="reply:${replyList.list}">
+                                            <tbody th:each="reply,replyStat:${replyList.list}">
                                             <tr>
                                                 <td th:text="${replyList.pageNum}"></td>
+<!--                                                <td th:text="${replyStat.index}"></td>-->
                                                 <td th:text="${reply.username}" style="width: 80px;"></td>
                                                 <td th:text="${reply.content}"></td>
                                                 <td th:text="${#dates.format(reply.createTime,'yyyy-MM-dd')}"></td>

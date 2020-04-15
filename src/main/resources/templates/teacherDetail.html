@@ -6,22 +6,12 @@
     <meta charset="UTF-8">
     <title>家教网</title>
     <script src="/js/jquery-3.4.1.min.js" type="text/javascript"></script>
-    <script src="/vendor/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
+    <script src="/js/bootstrap.js" type="text/javascript"></script>
     <script src="/vendor/popper.js/umd/popper.min.js" type="text/javascript"> </script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
     <script src="/js/jiajiao.js" type="text/javascript"></script>
-    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/bootstrap.css">
     <link rel="stylesheet" href="/css/bootstrap-theme.min.css">
-    <script type="text/javascript">
-        $(document).ready(function () {
-            // $(".dropdown-toggle").dropdown(toggle);
-            var location = window.location.href;
-            var id = location.substr(location.lastIndexOf('/')+1);
-            $("#"+id).addClass("active");
-
-        });
-
-    </script>
 </head>
 <body id="jiajiao">
 <p><a href="/" class="navbar-link" style="text-decoration: none"><h2>家教网</h2></a></p>
@@ -61,8 +51,8 @@
                     </a>
                     <ul class="dropdown-menu">
                         <!--                        <li><a th:href="@{'/'+${type}+'/toSetting'}">个人主页</a></li>-->
-                        <li><a th:href="@{'/student/toSetting'}">个人主页</a></li>
-                        <li><a th:href="@{'/'+${type}+'/logout'}">退出</a></li>
+                        <li class="dropdown-li"><a th:href="@{'/student/toSetting'}">个人主页</a></li>
+                        <li class="dropdown-li"><a th:href="@{'/'+${type}+'/logout'}">退出</a></li>
                     </ul>
                 </li>
                 <!--教师登录后显示-->
@@ -73,9 +63,8 @@
                         <span class="caret"></span>
                     </a>
                     <ul class="dropdown-menu">
-                        <!--                        <li><a th:href="@{'/'+${type}+'/toSetting'}">个人主页</a></li>-->
-                        <li><a th:href="@{'/teacher/toSetting'}">个人主页</a></li>
-                        <li><a th:href="@{'/'+${type}+'/logout'}">退出</a></li>
+                        <li class="dropdown-li"><a th:href="@{'/teacher/toSetting'}">个人主页</a></li>
+                        <li class="dropdown-li"><a th:href="@{'/'+${type}+'/logout'}">退出</a></li>
                     </ul>
                 </li>
                 <!--管理员登录后显示-->
@@ -137,22 +126,94 @@
                         <div class="text_left"style="width: 90px;height: 24px;position: absolute">辅导科目：</div> <div class="text_right" th:text="${teacher.item}" id="Tea_item" style="margin-left: 90px"></div>
                         <br><br>
                         <div style="background-color: rgb(254,255,240); height: 130px;">
-                        <div class="text_left"style="width: 90px;height: 24px;position: absolute">课时费：</div>   <span class="text_right" th:text="${teacher.price}" id="Tea_price" style="margin-left: 90px"></span>
-                        <br><br>
-                        <div class="text_left"style="width: 90px;height: 24px;position: absolute">联系电话：</div>
-                            <span>
-                                <button type="button" class="btn btn-success"style="margin-left: 90px" th:if="${session.student!= null}" th:text="${teacher.phone}" id="Tea_phone"></button>
-                                <button type="button" class="btn btn-success"style="margin-left: 90px" th:if="${session.student== null}" th:text="学员登录查看电话" ></button>
-                            </span>
-                            <br>
-                            <br>
-                        <div class="text_left"style="width: 90px;height: 24px;position: relative"><button type="button" class="btn btn-success" onclick="reserve()" th:if="${session.student!= null}">添加预约</button></div>
+                            <div class="text_left" style="width: 90px;height: 24px;position: absolute">课时费：</div>   <span class="text_right" th:text="${teacher.price}" id="Tea_price" style="margin-left: 90px"></span>
+                            <br><br>
+                            <div class="text_left" style="width: 90px;height: 24px;position: absolute">联系电话：</div>
+                                <span>
+                                    <button type="button" class="btn btn-success"style="margin-left: 90px" th:if="${session.student!= null}" th:text="${teacher.phone}" id="Tea_phone"></button>
+                                    <button type="button" class="btn btn-success"style="margin-left: 90px" th:if="${session.student== null}" th:text="学员登录查看电话" ></button>
+                                </span>
+                                <br>
+                                <br>
+                            <div class="text_left" style="width: 90px;height: 24px;position: relative">
+                                <button type="button" class="btn btn-success" data-toggle="modal" data-target="#myModal"  th:if="${session.student!= null}">添加预约</button>
+                            </div>
                         </div>
                         <br><br>
-                        <div class="text_left"style="width: 90px;height: 24px;position: absolute">个人简介：</div> <div th:text="${teacher.description}" style="margin-left: 90px;font-size: 15px;line-height: 228%;"></div>
+                        <div class="text_left" style="width: 90px;height: 24px;position: absolute">个人简介：</div> <div th:text="${teacher.description}" style="margin-left: 90px;font-size: 15px;line-height: 228%;"></div>
                     </span>
                 </div>
                 </div>
+
+
+                <!-- Modal -->
+                <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalCenterTitle">预约教师</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <form class="form-inline">
+                                    <div class="text-detail">
+                                        <span>姓名：</span>
+                                        <span id="modal_teacher_name" th:value="${teacher.username}">郑老师</span>
+                                        <br><br>
+                                        <span>年龄：</span>
+                                        <span th:text="${teacher.age}"></span>&nbsp;&nbsp;&nbsp;
+                                        <span>性别：</span>
+                                        <span th:text="${teacher.sex}"></span>
+                                        <br><br>
+                                        <span>学科名称</span>
+                                        <select id="modal_item">
+                                            <option>请选择学科</option>
+                                            <option th:each="item:${items}" th:text="${item}"></option>
+                                        </select>&nbsp;&nbsp;&nbsp;
+                                        <span>价格：</span>
+                                        <span id="modal_teacher_price" th:value="${teacher.price}">400元/小时起 </span>
+                                    </div>
+                                    <br><br>
+                                    <div class="form-group">
+                                        <label for="modal_student_name">学员姓名：</label>
+                                        <input type="text" class="form-control" id="modal_student_name" placeholder="Jane Doe" th:value="${session.student.username}">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="modal_teacher_phone">教员电话：</label>
+                                        <input type="text" class="form-control" id="modal_teacher_phone" th:value="${teacher.phone}">
+                                    </div>
+                                    <br><br>
+                                    <div class="form-group">
+                                        <label for="modal_student_phone">学员电话：</label>
+                                        <input type="text" class="form-control" id="modal_student_phone">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="modal_address">上课地址：</label>
+                                        <input type="text" class="form-control" id="modal_address" placeholder="">
+                                    </div>
+                                </form>
+
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">取消预约</button>
+                                <button type="button" class="btn btn-primary" onclick="teaReserve()">确定预约</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+
+
+
+
+
+
+
+
+
             </div>
             <hr style="border: 1px solid #ddd">
             <span style="font-size: 15px">家教点评</span><span th:text="${count}+'条'" class="comment_count"></span>
@@ -178,7 +239,7 @@
 
                         <div class="collapse sub-comment" th:id="${'comment-'+comment.id}">
                             <div class="form-group" style="height: 55px;">
-                                <input type="text" class="form-control" placeholder="评论一下……" autocomplete="off"
+                                <input type="text" required class="form-control" placeholder="评论一下……" autocomplete="off"
                                        th:id="${'input-'+comment.id}">
                                 <button type="button" class="btn btn-success pull-right" onclick="reply(this)"
                                         th:data-id="${comment.id}">
@@ -206,7 +267,7 @@
                             <option>请选择学科</option>
                             <option th:each="item:${items}" th:text="${item}"></option>
                         </select><br>
-                        学习过程<textarea class="form-control" rows="3" id="comment_content"></textarea><br>
+                        学习过程<textarea class="form-control" required rows="3" id="comment_content"></textarea><br>
                         综合评价
                         <select id="overview">
                             <option>请选择</option>
@@ -231,7 +292,7 @@
                     <div class="list-group">
                         <strong><h4 class="list-group-title">成功案例</h4></strong>
                         <div type="button" class="list-group-item" th:each="orderInfo : ${ordersInfo}">
-                            <a th:text="${orderInfo.teaName}+'预约了'+${orderInfo.address}+${orderInfo.stuName}"
+                            <a th:text="${orderInfo.teacherName}+'预约了'+${orderInfo.address}+${orderInfo.studentName}"
                                style="display: block;height: 12px;width: 180px;cursor: pointer;"></a>
                             <span style="padding-left: 207px;"
                                   th:text="${#dates.format(orderInfo.createTime,'yyyy-MM-dd')}"></span>
