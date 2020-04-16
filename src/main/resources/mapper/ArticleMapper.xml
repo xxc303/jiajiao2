@@ -2,20 +2,24 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.bdu.jiajiao.mapper.ArticleMapper">
     <insert id="addArticle" parameterType="Article">
-        insert into jiajiao.article(title, content, creator, creator_id, create_time,type)
+        insert into jiajiao.article(title, content, creator, creator_id, create_time, type)
         values (#{title}, #{content}, #{creator}, #{creatorId}, #{createTime}, #{type})
     </insert>
 
     <select id="queryAllTeaArticle" resultType="Article">
         select *
         from jiajiao.article
-        where type = 1 order by id desc limit 5
+        where type = 1
+        order by id desc
+        limit 5
     </select>
 
     <select id="queryAllStuArticle" resultType="Article">
         select *
         from jiajiao.article
-        where type = 3 order by id desc limit 5
+        where type = 3
+        order by id desc
+        limit 5
     </select>
 
     <select id="queryByName" resultType="Article">
@@ -30,4 +34,24 @@
         where id = #{id}
     </select>
 
+    <select id="queryAllArticle" resultType="Article">
+        select *
+        from jiajiao.article
+    </select>
+
+    <delete id="deleteById">
+        delete
+        from jiajiao.article
+        where id = #{id}
+    </delete>
+
+    <update id="updateArticle">
+        update jiajiao.article
+        set title       = #{title},
+            content     = #{content},
+            creator     = #{creator},
+            create_time = #{createTime},
+            type=#{type}
+        where id = #{id}
+    </update>
 </mapper>

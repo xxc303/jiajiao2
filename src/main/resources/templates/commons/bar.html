@@ -43,6 +43,13 @@
                 </a>
             </li>
             <li class="nav-item">
+                <a class="nav-link" href="/admin/articleInfo"
+                   th:class="${activeUri=='articleInfo'?'nav-link active':'nav-link'}">
+                    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" focusable="false" width="1em" height="1em" style="-ms-transform: rotate(360deg); -webkit-transform: rotate(360deg); transform: rotate(360deg);" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24"><g fill="none" stroke="#626262" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="M16 13H8"/><path d="M16 17H8"/><path d="M10 9H8"/></g></svg>
+                    文章管理
+                </a>
+            </li>
+            <li class="nav-item">
                 <a class="nav-link" href="/admin/commentInfo"
                    th:class="${activeUri=='commentInfo'?'nav-link active':'nav-link'}">
                     <svg xmlns="http://www.w3.org/2000/svg"

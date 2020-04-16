@@ -131,13 +131,6 @@ function reserve() {
     var teacherPhone = $("#modal_teacher_phone").val();
     var studentPhone = $("#modal_student_phone").val();
     var address = $("#modal_address").val();
-    console.log(studentName);
-    console.log(price);
-    console.log(item);
-    console.log(teacherName);
-    console.log(teacherPhone);
-    console.log(studentPhone);
-    console.log(address);
     $.ajax({
         type: "post",
         url: "/student/reserve",
@@ -198,3 +191,43 @@ function teaReserve() {
         dataType: "json"
     });
 }
+
+function queryArticleById(title,content,id) {
+    console.log(id);
+    console.log(title);
+    console.log(content);
+    $("#article_id").val(id)
+    $("#article_title").val(title);
+    $("#article_content").val(content);
+}
+
+function updateArticle() {
+    var id = $("#article_id").val();
+    var title = $("#article_title").val();
+    var content = $("#article_content").val();
+    console.log(id);
+    console.log(title);
+    console.log(content);
+    $.ajax({
+        type: "post",
+        url: "/admin/updateArticle",
+        contentType: "application/json",
+        data: JSON.stringify({
+            "id": id,
+            "title": title,
+            "content": content
+        }),
+        success: function (response) {
+            console.log(response);
+            if (response.code === 200) {
+                window.location.reload();
+                alert("修改成功！");
+            } else if (response.code === 501) {
+                alert(response.message);
+            }
+        },
+        dataType: "json"
+    });
+
+}
+

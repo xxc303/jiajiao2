@@ -122,29 +122,6 @@ public class TeacherController {
             return ResultDTO.okOf();
         }
     }
-    //@RequestMapping("/teaReserve")
-    //public Object teaReserve(@RequestBody OrderDTO orderDTO,
-    //                         HttpServletRequest request){
-    //    Student studentdb = studentService.findById(orderDTO.getStudentId());
-    //    Student student = (Student) request.getSession().getAttribute("student");
-    //    Teacher teacher = (Teacher) request.getSession().getAttribute("teacher");
-    //    if (student == null && teacher == null) {
-    //        return ResultDTO.errorOf(500, "请登录");
-    //    }
-    //    Order order = new Order();
-    //    order.setTeaName(teacher.getUsername());
-    //    order.setTeaPhone(teacher.getPhone());
-    //    order.setStuName(studentdb.getUsername());
-    //    order.setStuPhone(studentdb.getPhone());//
-    //    order.setItem(studentdb.getItem());//
-    //    order.setAddress(studentdb.getAddress());//
-    //    order.setPrice(studentdb.getPrice());
-    //    order.setCreateTime(new Date());
-    //    order.setType(0);
-    //    orderMapper.addOrder(order);
-    //    return ResultDTO.okOf();
-    //}
-
 
     /**
      * 查询

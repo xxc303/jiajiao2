@@ -1,6 +1,7 @@
 package com.bdu.jiajiao.controller;
 
 import com.bdu.jiajiao.dto.PasswordDTO;
+import com.bdu.jiajiao.dto.ResultDTO;
 import com.bdu.jiajiao.mapper.ArticleMapper;
 import com.bdu.jiajiao.mapper.CommentMapper;
 import com.bdu.jiajiao.pojo.*;
@@ -9,6 +10,7 @@ import com.bdu.jiajiao.service.CommentService;
 import com.bdu.jiajiao.service.StudentService;
 import com.bdu.jiajiao.service.TeacherService;
 import com.github.pagehelper.PageInfo;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -50,6 +52,49 @@ public class AdminController {
     @Autowired
     private CommentMapper commentMapper;
 
+    /**
+     *
+     */
+    @ResponseBody
+    @RequestMapping("/updateArticle")
+    public ResultDTO queryById(@RequestBody Article article, Model model) {
+        Article articledb = articleMapper.queryById(article.getId());
+        articledb.setTitle(article.getTitle());
+        articledb.setContent(article.getContent());
+        articledb.setCreateTime(new Date());
+        int i = articleMapper.updateArticle(articledb);
+        if (i < 0) {
+            return ResultDTO.errorOf(501, "修改失败！");
+        } else {
+            return ResultDTO.okOf();
+        }
+    }
+
+    /**
+     * 文章删除
+     */
+    @RequestMapping("/deleteArticle/{id}")
+    public String deleteArticle(Model model, @PathVariable("id") int id) {
+        int i = articleMapper.deleteById(id);
+        if (i < 0){
+            model.addAttribute("msgFail","删除失败！");
+        }else {
+            model.addAttribute("msgSuccess","删除成功！");
+        }
+        model.addAttribute("type","admin");
+        return "redirect:/admin/articleInfo";
+    }
+
+    /**
+     * 文章管理
+     */
+    @RequestMapping("/articleInfo")
+    public String articleInfo(Model model){
+        List<Article> articles = articleMapper.queryAllArticle();
+        model.addAttribute("articles",articles);
+        model.addAttribute("type","admin");
+        return "/admin/articleInfo";
+    }
 
     /**
      * 修改密码

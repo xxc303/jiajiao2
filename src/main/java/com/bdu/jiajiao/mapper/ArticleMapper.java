@@ -21,4 +21,10 @@ public interface ArticleMapper {
 
     Article queryById(int id);
 
+    List<Article> queryAllArticle();
+
+    int deleteById(int id);
+
+    int updateArticle(Article article);
+
 }

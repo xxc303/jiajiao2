@@ -101,7 +101,7 @@ public class CommentController {
      */
     @ResponseBody
     @RequestMapping("/reply/{commentId}")
-    public ResultDTO<List<Reply>> queryReplyByCommentId(@PathVariable("commentId") int commentId, Model model){
+    public ResultDTO<List<Reply>> queryReplyByCommentId(@PathVariable("commentId") int commentId){
         List<Reply> replies = commentMapper.queryReplyByCommentId(commentId);
         return ResultDTO.okOf(replies);
     }
