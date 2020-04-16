@@ -17,7 +17,7 @@ public interface ArticleMapper {
 
     List<Article> queryAllStuArticle();
 
-    Article queryByName(String creator);
+    List<Article> queryByName(String creator);
 
     Article queryById(int id);
 

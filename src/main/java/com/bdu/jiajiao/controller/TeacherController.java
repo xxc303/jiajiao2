@@ -68,6 +68,49 @@ public class TeacherController {
     }
 
     /**
+     * 文章修改
+     */
+    @ResponseBody
+    @RequestMapping("/updateArticle")
+    public ResultDTO queryById(@RequestBody Article article, Model model) {
+        Article articledb = articleMapper.queryById(article.getId());
+        articledb.setTitle(article.getTitle());
+        articledb.setContent(article.getContent());
+        articledb.setCreateTime(new Date());
+        int i = articleMapper.updateArticle(articledb);
+        if (i < 0) {
+            return ResultDTO.errorOf(501, "修改失败！");
+        } else {
+            return ResultDTO.okOf();
+        }
+    }
+    /**
+     * 文章删除
+     */
+    @RequestMapping("/deleteArticle/{id}")
+    public String deleteArticle(Model model, @PathVariable("id") int id) {
+        int i = articleMapper.deleteById(id);
+        if (i < 0){
+            model.addAttribute("msgFail","删除失败！");
+        }else {
+            model.addAttribute("msgSuccess","删除成功！");
+        }
+        model.addAttribute("type","teacher");
+        return "redirect:/teacher/articleList";
+    }
+    /**
+     * 文章列表
+     */
+    @RequestMapping("/articleList")
+    public String articleList(Model model,HttpServletRequest request){
+        Teacher teacher = (Teacher) request.getSession().getAttribute("teacher");
+        List<Article> articles = articleMapper.queryByName(teacher.getUsername());
+        model.addAttribute("articles",articles);
+        model.addAttribute("type", "teacher");
+        return "articleList";
+    }
+
+    /**
      * 分享文章功能
      * @param model
      * @return

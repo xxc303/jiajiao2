@@ -53,7 +53,7 @@ public class AdminController {
     private CommentMapper commentMapper;
 
     /**
-     *
+     *  文章修改
      */
     @ResponseBody
     @RequestMapping("/updateArticle")

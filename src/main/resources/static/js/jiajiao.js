@@ -230,4 +230,29 @@ function updateArticle() {
     });
 
 }
+function updateTeaArticle() {
+    var id = $("#article_id").val();
+    var title = $("#article_title").val();
+    var content = $("#article_content").val();
+    $.ajax({
+        type: "post",
+        url: "/teacher/updateArticle",
+        contentType: "application/json",
+        data: JSON.stringify({
+            "id": id,
+            "title": title,
+            "content": content
+        }),
+        success: function (response) {
+            console.log(response);
+            if (response.code === 200) {
+                window.location.reload();
+                alert("修改成功！");
+            } else if (response.code === 501) {
+                alert(response.message);
+            }
+        },
+        dataType: "json"
+    });
 
+}

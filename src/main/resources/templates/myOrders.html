@@ -100,6 +100,12 @@
                 <span th:text="分享文章"></span>
             </a>
         </li>
+        <li class="nav-item" th:if="${type=='teacher'}">
+            <a th:href="@{'/'+${type}+'/articleList'}" class="button_left">
+                <span class="glyphicon glyphicon-list"></span>
+                <span th:text="我的文章"></span>
+            </a>
+        </li>
         <li class="nav-item">
             <a class="collapsed button_left" data-toggle="collapse" href="#collapseExample1"aria-expanded="true" aria-controls="collapseExample">
                 <span class="glyphicon glyphicon-list-alt"></span>
