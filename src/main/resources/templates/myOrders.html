@@ -212,11 +212,12 @@
 </body>
 
 <script>
-    $(".deleteBtn").click(
-        function () {
+    $(".deleteBtn").click(function () {
+        if (window.confirm("确定要删除吗？")) {
             //取消订单
-            $("#delete").attr("action",$(this).attr("del_uri")).submit();
+            $("#delete").attr("action", $(this).attr("del_uri")).submit();
             return false;
+        }
     })
 </script>
 </html>
