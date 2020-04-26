@@ -236,7 +236,13 @@ public class StudentController {
      * 个人主页
      */
     @RequestMapping("/toSetting")
-    public String toSetting(Model model) {
+    public String toSetting(Model model,HttpServletRequest request) {
+        Student student = (Student) request.getSession().getAttribute("student");
+        if (student.getItem() == null){
+            model.addAttribute("msg","请完善个人信息！");
+        }else {
+            model.addAttribute("msg","欢迎来到个人主页！");
+        }
         model.addAttribute("type", "student");
         return "main";
     }
@@ -254,6 +260,7 @@ public class StudentController {
         model.addAttribute("student", student);
         model.addAttribute("articleList", articleList);
         model.addAttribute("studentsInfo", studentsInfo);
+        model.addAttribute("type", "student");
         return "studentDetail";
     }
 

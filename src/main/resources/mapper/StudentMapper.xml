@@ -87,6 +87,6 @@
     </delete>
 
     <select id="queryStudentsInfo" resultType="Student">
-        select id, address, username,item, create_time from jiajiao.student limit 4
+        select id, address, username,item, area, detail_requirement, id_requirement,price, create_time from jiajiao.student where status != 0 limit 4
     </select>
 </mapper>

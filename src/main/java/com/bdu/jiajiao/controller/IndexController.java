@@ -1,7 +1,11 @@
 package com.bdu.jiajiao.controller;
 
+import com.bdu.jiajiao.mapper.StudentMapper;
+import com.bdu.jiajiao.mapper.TeacherMapper;
 import com.bdu.jiajiao.pojo.Student;
+import com.bdu.jiajiao.pojo.Teacher;
 import com.bdu.jiajiao.service.StudentService;
+import com.bdu.jiajiao.service.TeacherService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -12,6 +16,7 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.Enumeration;
+import java.util.List;
 
 /**
  * @author 123
@@ -23,6 +28,12 @@ public class IndexController {
 
     @Autowired
     private StudentService studentService;
+
+    @Autowired
+    private TeacherMapper teacherMapper;
+
+    @Autowired
+    private StudentMapper studentMapper;
 
     /**
      * 登录页
@@ -37,28 +48,16 @@ public class IndexController {
      */
     @GetMapping("/showIndex")
     public String showIndex(HttpServletRequest request, Model model) {
-        //Cookie[] cookies = request.getCookies();
-        //if (cookies != null && cookies.length != 0){
-        //    for (Cookie cookie : cookies) {
-        //        if (cookie.getName().equals("token")){
-        //            String token = cookie.getValue();
-        //            Student student = studentService.findByToken(token);
-        //            if (student != null){
-        //                request.getSession().setAttribute("student",student);
-        //            }
-        //            break;
-        //        }
-        //    }
-        //}
         Object student = request.getSession().getAttribute("student");
         Object teacher = request.getSession().getAttribute("teacher");
-        Object admin = request.getSession().getAttribute("admin");
+        List<Teacher> teachers = teacherMapper.queryTeachersInfo();
+        List<Student> students = studentMapper.queryStudentsInfo();
+        model.addAttribute("teachers",teachers);
+        model.addAttribute("students",students);
         if (student != null){
             model.addAttribute("type","student");
         }else if (teacher != null){
             model.addAttribute("type","teacher");
-        }else if (admin != null){
-            model.addAttribute("type","admin");
         }
         return "showIndex";
     }

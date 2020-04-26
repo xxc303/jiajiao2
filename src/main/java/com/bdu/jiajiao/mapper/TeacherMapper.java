@@ -29,4 +29,6 @@ public interface TeacherMapper {
     List<Teacher> search(@Param("item") String item, @Param("area") String area);
 
     int delete(@Param(value = "id") int id);
+
+    List<Teacher> queryTeachersInfo();
 }

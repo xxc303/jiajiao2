@@ -286,7 +286,13 @@ public class TeacherController {
      * 个人主页
      */
     @RequestMapping("/toSetting")
-    public String toSetting(Model model) {
+    public String toSetting(Model model, HttpServletRequest request) {
+        Teacher teacher = (Teacher) request.getSession().getAttribute("teacher");
+        if (teacher.getItem() == null){
+            model.addAttribute("msg","请完善个人信息！");
+        }else {
+            model.addAttribute("msg","欢迎来到个人主页！");
+        }
         model.addAttribute("type", "teacher");
         return "main";
     }

@@ -47,12 +47,12 @@
     width: 102px;
 }
 
-.form-horizontal {
-    background-color: rgb(255, 254, 248);
-    width: 347px;
-    /*height: 200px;*/
-    float: right;
-}
+/*.form-horizontal {*/
+/*    background-color: rgb(255, 254, 248);*/
+/*    width: 347px;*/
+/*    !*height: 200px;*!*/
+/*    float: right;*/
+/*}*/
 
 ul {
     list-style: none;
@@ -185,4 +185,11 @@ p{
     /*padding: 10px;*/
     /*padding-left: 20px;*/
     /*font-size: 16px;*/
+}
+
+.clearfix{
+    height: 200px;
+    width: 525px;
+    display: inline-block;
+    border-bottom: 1px solid #eee;
 }

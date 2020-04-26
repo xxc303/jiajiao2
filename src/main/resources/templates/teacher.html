@@ -38,7 +38,7 @@
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
                 <li id="showIndex"><a href="/showIndex">首页 <span class="sr-only">(current)</span></a></li>
-                <li id="teacher"><a href="/teacher/teacher">家教信息库</a></li>
+                <li id="teacher" class="active"><a href="/teacher/teacher">家教信息库</a></li>
                 <li id="student"><a href="/student/student">学员信息</a></li>
             </ul>
             <form class="navbar-form navbar-left" th:action="@{/teacher/search}" method="post">
@@ -127,6 +127,7 @@
                         <span class="text_left">个人简介：</span> <span class="text_right text_desc" th:text="${teacher.description}"></span><a th:href="'/teacher/toDetail/'+${teacher.id}" style="color: green;">[更多]</a>
                     </span>
                 </div>
+
             </div>
                 <!--分页-->
                 <nav aria-label="Page navigation">
