@@ -79,7 +79,7 @@
                 </li>
                 <!--没有登录显示-->
                 <li th:if="${session.student == null && session.teacher == null && session.admin== null}">
-                    <a href="/">登录</a>
+                    <a href="/">注册/登录</a>
                 </li>
             </ul>
         </div>
@@ -153,11 +153,6 @@
     </ul>
 </div>
 <div class="col-lg-10 col-md-12 col-sm-12 col-xs-12 navbar navbar-default nav-height" style="padding-bottom: 85px;">
-    <!--    <nav class="navbar navbar-default navbar-static-top">-->
-    <!--        <div class="container">-->
-
-    <!--        </div>-->
-    <!--    </nav>-->
     <div class="page-holder w-100 d-flex flex-wrap">
         <div class="container-fluid px-xl-5">
             <section class="py-5">
