@@ -120,11 +120,11 @@ public class StudentController {
     /**
      * 搜索功能
      */
-    @PostMapping("/search")
-    public String search(Model model,
+    @RequestMapping(value = "/search",method = {RequestMethod.POST, RequestMethod.GET})
+    public String search(Model model, HttpSession session,
                          String item,String area,
                          @RequestParam(defaultValue = "1") int pageNum,
-                         @RequestParam(defaultValue = "10") int pageSize) {
+                         @RequestParam(defaultValue = "1") int pageSize) {
         List<Student> students = studentService.search(item, area, pageNum, pageSize);
         PageInfo<Student> pageInfo = new PageInfo<>(students);
 
@@ -133,7 +133,10 @@ public class StudentController {
         model.addAttribute("pageInfo", pageInfo);
         model.addAttribute("articleList",articleList);
         model.addAttribute("studentsInfo",studentsInfo);
+        session.setAttribute("item",item);
+        session.setAttribute("area",area);
         model.addAttribute("type", "student");
+        model.addAttribute("search","search");
         return "student";
     }
 

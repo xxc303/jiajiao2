@@ -169,11 +169,11 @@ public class TeacherController {
     /**
      * 查询
      */
-    @RequestMapping("/search")
+    @RequestMapping(value = "/search", method = {RequestMethod.POST,RequestMethod.GET})
     public String search(Model model,
-                         String item,String area,
+                         String item,String area,HttpSession session,
                          @RequestParam(defaultValue = "1")int pageNum,
-                         @RequestParam(defaultValue = "10")int pageSize){
+                         @RequestParam(defaultValue = "1")int pageSize){
         List<Teacher> teachers = teacherService.search(item, area, pageNum, pageSize);
         PageInfo<Teacher> pageInfo = new PageInfo<>(teachers);
 
@@ -182,6 +182,8 @@ public class TeacherController {
         model.addAttribute("pageInfo",pageInfo);
         model.addAttribute("type","teacher");
         model.addAttribute("search","search");
+        session.setAttribute("item",item);
+        session.setAttribute("area",area);
         model.addAttribute("articleList",articleList);
         model.addAttribute("ordersInfo",ordersInfo);
         return "teacher";
