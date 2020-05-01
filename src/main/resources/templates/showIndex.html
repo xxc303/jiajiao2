@@ -171,6 +171,14 @@
                                 <button type="submit" class="btn btn-default">登录</button>
                             </div>
                         </form>
+                        <!--错误提示-->
+                        <div class="alert alert-danger" role="alert" th:if="${not #strings.isEmpty(msg)}"
+                             style="font-size: 15px;margin: 65px 21px;height: 48px;">
+                            <a href="#" class="close" data-dismiss="alert">
+                                &times;
+                            </a>
+                            <span th:text="${msg}"></span>
+                        </div>
                     </div>
                 </div>
                 <div role="tabpanel" class="tab-pane" id="stuLogin" style="border: 1px solid #eee">
@@ -184,8 +192,17 @@
                                 <button type="submit" class="btn btn-default">登录</button>
                             </div>
                         </form>
+                        <!--错误提示-->
+                        <div class="alert alert-danger" role="alert" th:if="${not #strings.isEmpty(msg)}"
+                              style="font-size: 15px;margin: 65px 21px;height: 48px;">
+                            <a href="#" class="close" data-dismiss="alert">
+                                    &times;
+                            </a>
+                            <span th:text="${msg}"></span>
+                        </div>
                     </div>
                 </div>
+
             </div>
 </div>
 

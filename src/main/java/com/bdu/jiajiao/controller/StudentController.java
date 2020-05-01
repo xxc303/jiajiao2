@@ -274,20 +274,25 @@ public class StudentController {
     public String toLogin(HttpSession session, Model model) {
         model.addAttribute("title", "家长/学生");
         model.addAttribute("type", "student");
+        session.setAttribute("url","toLogin");
         return "login";
     }
 
     @RequestMapping("login")
     public String login(@RequestParam("username") String username,
                         @RequestParam("password") String password,
+                        HttpSession session,
                         HttpServletResponse response,
                         HttpServletRequest request,
                         RedirectAttributes modelMap) {
-
         Student student = studentService.login(username, password);
         if (student == null) {
             modelMap.addFlashAttribute("msg", "用户名或密码错误");
-            return "redirect:/student/toLogin";
+            if ((("showIndex").equals(session.getAttribute("url")))){
+                return "redirect:/showIndex";
+            }else {
+                return "redirect:/student/toLogin";
+            }
         } else {
             String token = UUID.randomUUID().toString();
             // Student dbStudent = studentService.findById(student.getId());

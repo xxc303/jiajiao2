@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.util.Enumeration;
 import java.util.List;
 
@@ -47,13 +48,14 @@ public class IndexController {
      * 首页
      */
     @GetMapping("/showIndex")
-    public String showIndex(HttpServletRequest request, Model model) {
+    public String showIndex(HttpServletRequest request, HttpSession session, Model model) {
         Object student = request.getSession().getAttribute("student");
         Object teacher = request.getSession().getAttribute("teacher");
         List<Teacher> teachers = teacherMapper.queryTeachersInfo();
         List<Student> students = studentMapper.queryStudentsInfo();
         model.addAttribute("teachers",teachers);
         model.addAttribute("students",students);
+        session.setAttribute("url","showIndex");
         if (student != null){
             model.addAttribute("type","student");
         }else if (teacher != null){

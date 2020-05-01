@@ -327,20 +327,25 @@ public class TeacherController {
     public String toLogin(HttpSession session, Model model) {
         model.addAttribute("title", "家教老师");
         model.addAttribute("type", "teacher");
+        session.setAttribute("url","toLogin");
         return "login";
     }
 
     @RequestMapping("login")
     public String Login(@RequestParam("username") String username,
                         @RequestParam("password") String password,
+                        HttpSession session,
                         HttpServletResponse response,
                         HttpServletRequest request,
-                        RedirectAttributes modelMap,
-                        Model model) {
+                        RedirectAttributes modelMap) {
         Teacher teacher = teacherService.login(username, password);
         if (teacher == null) {
             modelMap.addFlashAttribute("msg", "用户名或密码错误");
-            return "redirect:/teacher/toLogin";
+            if (("showIndex").equals(session.getAttribute("url"))){
+                return "redirect:/showIndex";
+            }else {
+                return "redirect:/teacher/toLogin";
+            }
         } else {
             String token = UUID.randomUUID().toString();
             teacher.setToken(token);
