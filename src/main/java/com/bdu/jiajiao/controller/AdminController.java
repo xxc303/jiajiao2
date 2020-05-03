@@ -157,7 +157,7 @@ public class AdminController {
      * 评论管理
      */
     @RequestMapping("/commentInfo")
-    public String comment(Model model, @RequestParam(defaultValue = "1") int pageNum, @RequestParam(defaultValue = "1") int pageSize) {
+    public String comment(Model model, @RequestParam(defaultValue = "1") int pageNum, @RequestParam(defaultValue = "3") int pageSize) {
         List<Comment> comments = commentService.queryAllComment(pageNum,pageSize);
         PageInfo<Comment> commentList = new PageInfo<>(comments);
         model.addAttribute("commentList", commentList);
@@ -179,7 +179,7 @@ public class AdminController {
      * 回复管理
      */
     @RequestMapping("/replyInfo")
-    public String reply(Model model, @RequestParam(defaultValue = "1") int pageNum, @RequestParam(defaultValue = "1") int pageSize){
+    public String reply(Model model, @RequestParam(defaultValue = "1") int pageNum, @RequestParam(defaultValue = "3") int pageSize){
         List<Reply> replies = commentService.queryAllReply(pageNum,pageSize);
         PageInfo<Reply> replyList = new PageInfo<>(replies);
         model.addAttribute("replyList", replyList);
@@ -217,7 +217,7 @@ public class AdminController {
     @RequestMapping("/teacherInfo")
     public String teacherInfo(Model model,
                               @RequestParam(defaultValue = "1") int pageNum,
-                              @RequestParam(defaultValue = "1") int pageSize) {
+                              @RequestParam(defaultValue = "2") int pageSize) {
         List<Teacher> teachers = teacherService.queryAllTeacher(pageNum, pageSize);
         PageInfo<Teacher> pageInfo = new PageInfo<>(teachers);
 
@@ -232,7 +232,7 @@ public class AdminController {
     @RequestMapping("/studentInfo")
     public String studentInfo(Model model,
                               @RequestParam(defaultValue = "1") int pageNum,
-                              @RequestParam(defaultValue = "1") int pageSize) {
+                              @RequestParam(defaultValue = "2") int pageSize) {
         List<Student> students = studentService.queryAllStudent(pageNum, pageSize);
         PageInfo<Student> pageInfo = new PageInfo<>(students);
         model.addAttribute("pageInfo", pageInfo);
@@ -255,8 +255,7 @@ public class AdminController {
                         @RequestParam("password") String password,
                         HttpServletResponse response,
                         HttpServletRequest request,
-                        RedirectAttributes modelMap,
-                        Model model) {
+                        RedirectAttributes modelMap) {
         Admin admin = adminService.login(username, password);
         if (admin == null) {
             modelMap.addFlashAttribute("msg", "用户名或密码错误");

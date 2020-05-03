@@ -70,7 +70,7 @@
                                         <table class="table table-hover">
                                             <thead>
                                             <tr>
-                                                <th>id</th>
+                                                <th>编号</th>
                                                 <th>用户名</th>
                                                 <th style="width: 62px;">性别</th>
                                                 <th>授课区域</th>
@@ -85,7 +85,7 @@
                                             </thead>
                                             <tbody th:each="student:${pageInfo.list}">
                                             <tr>
-                                                <td th:text="${pageInfo.pageNum}"></td>
+                                                <td th:text="${student.id}"></td>
                                                 <td th:text="${student.username}" style="width: 80px;"></td>
                                                 <td th:text="${student.sex}"></td>
                                                 <td th:text="${student.area}"></td>

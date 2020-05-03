@@ -119,7 +119,7 @@
                         <br><br>
                         <div class="text_left"style="width: 90px;height: 24px;position: absolute">辅导科目：</div> <div class="text_right" th:text="${teacher.item}" id="Tea_item" style="margin-left: 90px"></div>
                         <br><br>
-                        <div style="background-color: rgb(254,255,240); height: 130px;">
+                        <div style="background-color: rgb(254,255,240); height: 100px;">
                             <div class="text_left" style="width: 90px;height: 24px;position: absolute">课时费：</div>   <span class="text_right" th:text="${teacher.price}" id="Tea_price" style="margin-left: 90px"></span>
                             <br><br>
                             <div class="text_left" style="width: 90px;height: 24px;position: absolute">联系电话：</div>
@@ -127,11 +127,7 @@
                                     <button type="button" class="btn btn-success"style="margin-left: 90px" th:if="${session.student!= null}" th:text="${teacher.phone}" id="Tea_phone"></button>
                                     <button type="button" class="btn btn-success"style="margin-left: 90px" th:if="${session.student== null}" th:text="学员登录查看电话" ></button>
                                 </span>
-                                <br>
-                                <br>
-                            <div class="text_left" style="width: 90px;height: 24px;position: relative">
                                 <button type="button" class="btn btn-success" data-toggle="modal" data-target="#myModal"  th:if="${session.student!= null}">添加预约</button>
-                            </div>
                         </div>
                         <br><br>
                         <div class="text_left" style="width: 90px;height: 24px;position: absolute">个人简介：</div> <div th:text="${teacher.description}" style="margin-left: 90px;font-size: 15px;line-height: 228%;"></div>
