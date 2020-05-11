@@ -8,6 +8,11 @@
     <meta name="author" content="">
 
     <title>后台管理</title>
+
+    <script type="text/javascript" src="/js/jquery-3.4.1.min.js"></script>
+    <script type="text/javascript" src="/vendor/popper.js/umd/popper.min.js"></script>
+    <script type="text/javascript" src="/vendor/bootstrap/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="/js/jiajiao.js"></script>
     <!-- Bootstrap core CSS -->
     <link th:href="@{/webjars/bootstrap/4.0.0/css/bootstrap.css}" rel="stylesheet">
 
@@ -96,6 +101,11 @@
                                                 <td th:text="${#dates.format(student.createTime,'yyyy-MM-dd')}"></td>
                                                 <!--                        <th th:text="${student.description}"></th>-->
                                                 <td>
+                                                    <button class="btn btn-info btn-sm" data-toggle="modal"
+                                                            data-target="#myModal" th:text="编辑" th:data-id="${student.id}"
+                                                            onclick="findStudentById(this)"
+                                                            style="width: 62px;">
+                                                    </button>
                                                     <button th:attr="del_uri=@{/admin/deleteStu/}+${student.id}"
                                                             class="btn btn-sm btn-danger deleteBtn" th:text="删除"
                                                             style="width: 62px;"></button>
@@ -104,6 +114,94 @@
                                             </tbody>
                                         </table>
                                         <hr>
+
+                                        <div class="modal fade bd-example-modal-lg" id="myModal" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+                                            <div class="modal-dialog modal-lg">
+                                                <div class="modal-content" style="margin-top: 173px;">
+                                                    <div class="card-body" id="modal_tea">
+                                                        <input type="hidden" id="modal_stu_id"/>
+                                                        <form  class="form-inline">
+                                                            <div class="form-group">
+                                                                <span for="modal_stu_name" style="font-weight: bold;">姓名:</span>
+                                                                <input type="text" class="form-control" id="modal_stu_name">
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <span for="modal_stu_phone" style="margin-left: 80px;font-weight: bold;">电话:</span>
+                                                                <input type="text" class="form-control" id="modal_stu_phone">
+                                                            </div>
+                                                        </form><br>
+                                                        <form  class="form-inline">
+                                                            <div class="form-group">
+                                                                <span for="modal_stu_sex" style="font-weight: bold;">性别:</span>
+                                                                <input type="text" class="form-control"
+                                                                       id="modal_stu_sex"
+                                                                       autocomplete="off">
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <span for="modal_stu_price" style="margin-left: 80px;font-weight: bold;">价格:</span>
+                                                                <input type="text" class="form-control"
+                                                                       id="modal_stu_price"
+                                                                       autocomplete="off">
+                                                            </div>
+                                                        </form><br>
+                                                        <form  class="form-inline">
+                                                            <div class="form-group">
+                                                                <span for="modal_stu_grade" style="font-weight: bold;">年级:</span>
+                                                                <input type="text" class="form-control"
+                                                                       id="modal_stu_grade"
+                                                                       autocomplete="off">
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <span for="modal_stu_add" style="margin-left: 80px; font-weight: bold;">地址:</span>
+                                                                <input type="text" class="form-control"
+                                                                       id="modal_stu_add"
+                                                                       autocomplete="off">
+                                                            </div>
+                                                        </form><br>
+                                                        <form  class="form-inline">
+                                                            <div class="form-group">
+                                                                <span for="modal_stu_school" style="font-weight: bold;">学校:</span>
+                                                                <input type="text" class="form-control"
+                                                                       id="modal_stu_school"
+                                                                       autocomplete="off">
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <span for="modal_stu_score" style="margin-left: 80px; font-weight: bold;">成绩:</span>
+                                                                <input type="text" class="form-control"
+                                                                       id="modal_stu_score"
+                                                                       autocomplete="off">
+                                                            </div>
+                                                        </form><br>
+                                                        <div class="form-group">
+                                                            <label for="modal_stu_idRequirement">身份要求:</label>
+                                                            <input type="text" class="form-control"
+                                                                   id="modal_stu_idRequirement"
+                                                                   autocomplete="off">
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label for="modal_stu_area">授课区域:</label>
+                                                            <input type="text" class="form-control"
+                                                                   id="modal_stu_area"
+                                                                   autocomplete="off">
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label for="modal_stu_item">授课科目:</label>
+                                                            <input type="text" class="form-control"
+                                                                   id="modal_stu_item"
+                                                                   autocomplete="off">
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label for="modal_stu_desc">详细要求:</label>
+                                                            <textarea type="text" class="form-control"id="modal_stu_desc" rows="3"></textarea>
+                                                        </div>
+                                                        <button type="button" class="btn btn-primary" style="float:right;" onclick="updateStudent()">提交修改</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+
+
                                         <!--分页-->
                                         <nav aria-label="Page navigation">
                                             <ul class="pagination">
@@ -150,9 +248,7 @@
 <!-- Bootstrap core JavaScript
 ================================================== -->
 <!-- Placed at the end of the document so the pages load faster -->
-<script type="text/javascript" src="/js/jquery-3.2.1.slim.min.js"></script>
-<script type="text/javascript" src="/vendor/popper.js/umd/popper.min.js"></script>
-<script type="text/javascript" src="/vendor/bootstrap/js/bootstrap.min.js"></script>
+
 
 <!-- Icons -->
 <script type="text/javascript" src="/js/feather.min.js"></script>

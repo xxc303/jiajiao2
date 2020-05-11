@@ -196,7 +196,7 @@ function queryArticleById(title,content,id) {
     console.log(id);
     console.log(title);
     console.log(content);
-    $("#article_id").val(id)
+    $("#article_id").val(id);
     $("#article_title").val(title);
     $("#article_content").val(content);
 }
@@ -254,5 +254,134 @@ function updateTeaArticle() {
         },
         dataType: "json"
     });
-
 }
+
+function findTeacherById(e) {
+    var id = e.getAttribute("data-id");
+    console.log(id);
+    $.getJSON("/admin/findTeacherById/"+id, function (data) {
+        console.log(data);
+        $("#modal_tea_id").val(id);
+        $("#modal_tea_name").val(data.username);
+        $("#modal_tea_phone").val(data.phone);
+        $("#modal_tea_age").val(data.age);
+        $("#modal_tea_price").val(data.price);
+        $("#modal_tea_year").val(data.teachYear);
+        $("#modal_tea_add").val(data.address);
+        $("#modal_tea_title").val(data.title);
+        $("#modal_tea_area").val(data.area);
+        $("#modal_tea_item").val(data.item);
+        $("#modal_tea_desc").val(data.description);
+    });
+}
+
+function updateTeacher() {
+        var id = $("#modal_tea_id").val();
+        var username = $("#modal_tea_name").val();
+        var phone= $("#modal_tea_phone").val();
+        var age=$("#modal_tea_age").val();
+        var price= $("#modal_tea_price").val();
+        var teachYear= $("#modal_tea_year").val();
+        var address= $("#modal_tea_add").val();
+        var title=$("#modal_tea_title").val();
+        var area= $("#modal_tea_area").val();
+        var item= $("#modal_tea_item").val();
+        var description=$("#modal_tea_desc").val();
+    $.ajax({
+        type: "post",
+        url: "/admin/updateTeacher",
+        contentType: "application/json",
+        data: JSON.stringify({
+            "id":id,
+            "username" :username,
+            "phone":phone,
+            "age":age,
+            "price":price,
+            "teachYear":teachYear,
+            "address":address,
+            "title":title,
+            "area":area,
+            "item":item,
+            "description":description,
+        }),
+        success: function (response) {
+            console.log(response);
+            if (response.code === 200) {
+                window.location.reload();
+                alert("修改成功！");
+            } else if (response.code === 501) {
+                alert(response.message);
+            }
+        },
+        dataType: "json"
+    });
+}
+
+function findStudentById(e) {
+    var id = e.getAttribute("data-id");
+    console.log(id);
+    $.getJSON("/admin/findStudentById/"+id, function (data) {
+        console.log(data);
+        $("#modal_stu_id").val(id);
+        $("#modal_stu_name").val(data.username);
+        $("#modal_stu_phone").val(data.phone);
+        $("#modal_stu_sex").val(data.sex);
+        $("#modal_stu_price").val(data.price);
+        $("#modal_stu_grade").val(data.grade);
+        $("#modal_stu_area").val(data.area);
+        $("#modal_stu_add").val(data.address);
+        $("#modal_stu_school").val(data.school);
+        $("#modal_stu_score").val(data.score);
+        $("#modal_stu_idRequirement").val(data.idRequirement);
+        $("#modal_stu_item").val(data.item);
+        $("#modal_stu_desc").val(data.detailRequirement);
+    });
+}
+
+function updateStudent() {
+
+    var id = $("#modal_stu_id").val();
+    var username = $("#modal_stu_name").val();
+    var phone = $("#modal_stu_phone").val();
+    var sex = $("#modal_stu_sex").val();
+    var price = $("#modal_stu_price").val();
+    var grade = $("#modal_stu_grade").val();
+    var area = $("#modal_stu_area").val();
+    var address = $("#modal_stu_add").val();
+    var school = $("#modal_stu_school").val();
+    var score = $("#modal_stu_score").val();
+    var idRequirement = $("#modal_stu_idRequirement").val();
+    var item = $("#modal_stu_item").val();
+    var detailRequirement= $("#modal_stu_desc").val();
+    $.ajax({
+        type: "post",
+        url: "/admin/updateStudent",
+        contentType: "application/json",
+        data: JSON.stringify({
+            "id":id,
+            "username" :username,
+            "phone":phone,
+            "sex":sex,
+            "price":price,
+            "grade":grade,
+            "address":address,
+            "school":school,
+            "area":area,
+            "score":score,
+            "idRequirement":idRequirement,
+            "item":item,
+            "detailRequirement":detailRequirement
+        }),
+        success: function (response) {
+            console.log(response);
+            if (response.code === 200) {
+                window.location.reload();
+                alert("修改成功！");
+            } else if (response.code === 501) {
+                alert(response.message);
+            }
+        },
+        dataType: "json"
+    });
+}
+

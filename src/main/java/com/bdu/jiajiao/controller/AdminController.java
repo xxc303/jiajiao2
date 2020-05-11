@@ -2,6 +2,8 @@ package com.bdu.jiajiao.controller;
 
 import com.bdu.jiajiao.dto.PasswordDTO;
 import com.bdu.jiajiao.dto.ResultDTO;
+import com.bdu.jiajiao.dto.StudentDTO;
+import com.bdu.jiajiao.dto.TeacherDTO;
 import com.bdu.jiajiao.mapper.ArticleMapper;
 import com.bdu.jiajiao.mapper.CommentMapper;
 import com.bdu.jiajiao.pojo.*;
@@ -9,6 +11,7 @@ import com.bdu.jiajiao.service.AdminService;
 import com.bdu.jiajiao.service.CommentService;
 import com.bdu.jiajiao.service.StudentService;
 import com.bdu.jiajiao.service.TeacherService;
+import com.fasterxml.jackson.databind.util.JSONPObject;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -187,17 +190,7 @@ public class AdminController {
         return "/admin/replyInfo";
     }
 
-    /**
-     * 学员删除
-     */
-    @RequestMapping("deleteStu/{id}")
-    public String deleteStu(Model model, @PathVariable("id") int id) {
-        Student student = studentService.findById(id);
-        student.setStatus(0);
-        studentService.updateStudent(student);
-        model.addAttribute("type", "admin");
-        return "redirect:/admin/studentInfo";
-    }
+
 
     /**
      * 教师删除
@@ -209,6 +202,28 @@ public class AdminController {
         teacherService.updateTeacher(teacher);
         model.addAttribute("type", "admin");
         return "redirect:/admin/teacherInfo";
+    }
+
+    /**
+     * 根据id查询教师
+     */
+    @ResponseBody
+    @RequestMapping("/findTeacherById/{id}")
+    public Teacher findTeacherById(@PathVariable int id){
+        Teacher teacher = teacherService.findById(id);
+        return teacher;
+    }
+
+    /**
+     * 修改教师
+     */
+    @RequestMapping("updateTeacher")
+    @ResponseBody
+    public ResultDTO updateTeacher(@RequestBody TeacherDTO teacherDTO){
+        Teacher teacher = teacherService.findById(teacherDTO.getId());
+        BeanUtils.copyProperties(teacherDTO,teacher);
+        teacherService.updateTeacher(teacher);
+        return ResultDTO.okOf();
     }
 
     /**
@@ -224,6 +239,40 @@ public class AdminController {
         model.addAttribute("pageInfo", pageInfo);
         model.addAttribute("type", "admin");
         return "/admin/teacherInfo";
+    }
+
+    /**
+     * 学员删除
+     */
+    @RequestMapping("deleteStu/{id}")
+    public String deleteStu(Model model, @PathVariable("id") int id) {
+        Student student = studentService.findById(id);
+        student.setStatus(0);
+        studentService.updateStudent(student);
+        model.addAttribute("type", "admin");
+        return "redirect:/admin/studentInfo";
+    }
+
+    /**
+     * 根据id查询学生
+     */
+    @ResponseBody
+    @RequestMapping("/findStudentById/{id}")
+    public Student findStudentById(@PathVariable int id){
+        Student student = studentService.findById(id);
+        return student;
+    }
+
+    /**
+     * 修改学生
+     */
+    @RequestMapping("updateStudent")
+    @ResponseBody
+    public ResultDTO updateStudent(@RequestBody StudentDTO studentDTO){
+        Student student = studentService.findById(studentDTO.getId());
+        BeanUtils.copyProperties(studentDTO,student);
+        studentService.updateStudent(student);
+        return ResultDTO.okOf();
     }
 
     /**
