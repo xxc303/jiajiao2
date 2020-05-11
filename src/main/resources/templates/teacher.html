@@ -136,7 +136,7 @@
                             <a th:href="@{'/teacher/teacher/?pageNum='+${(pageInfo.pageNum)-1}+'&pageSize='+${pageInfo.pageSize}}" aria-label="Previous" th:if="${search}==null">
                                 <span aria-hidden="true">&lt;&lt;</span>
                             </a>
-                            <a th:href="@{'/teacher/search/?pageNum='+${(pageInfo.pageNum)-1}+'&pageSize='+${pageInfo.pageSize}}" aria-label="Previous" th:if="${search}!=null">
+                            <a th:href="@{'/teacher/search/?pageNum='+${(pageInfo.pageNum)-1}+'&pageSize='+${pageInfo.pageSize}+'&item='+${session.item}+'&area='+${session.area}}" aria-label="Previous" th:if="${search}!=null">
                                 <span aria-hidden="true">&lt;&lt;</span>
                             </a>
                         </li>
@@ -155,7 +155,7 @@
                             <a th:href="@{'/teacher/teacher/?pageNum='+${pageInfo.nextPage}+'&pageSize='+${pageInfo.pageSize}}" aria-label="Previous" th:if="${search}==null">
                                 <span aria-hidden="true">&gt;&gt;</span>
                             </a>
-                            <a th:href="@{'/teacher/search?pageNum='+${pageInfo.nextPage}+'&pageSize='+${pageInfo.pageSize}}" aria-label="Previous" th:if="${search}!=null">
+                            <a th:href="@{'/teacher/search?pageNum='+${pageInfo.nextPage}+'&pageSize='+${pageInfo.pageSize}+'&item='+${session.item}+'&area='+${session.area}}" aria-label="Previous" th:if="${search}!=null">
                                 <span aria-hidden="true">&gt;&gt;</span>
                             </a>
                         </li>

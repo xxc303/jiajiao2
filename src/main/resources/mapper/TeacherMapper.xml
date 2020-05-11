@@ -78,6 +78,15 @@
     </delete>
 
     <select id="queryTeachersInfo" resultType="Teacher">
-        select id, address, username,item, price, description, create_time from jiajiao.teacher where status != 0 limit 4
+        select id, address, username, item, price, description, create_time
+        from jiajiao.teacher
+        where status != 0
+        limit 4
+    </select>
+
+    <select id="queryTeacherByItem" parameterType="string" resultType="Teacher">
+        select *
+        from jiajiao.teacher
+        where item like concat('%', #{item}, '%') and status != 0;
     </select>
 </mapper>

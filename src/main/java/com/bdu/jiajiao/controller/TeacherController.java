@@ -159,6 +159,9 @@ public class TeacherController {
         order.setCreateTime(new Date());
         order.setType(0);
         int count = orderMapper.addOrder(order);
+        Student student = studentService.queryStudentByName(orderDTO.getStudentName());
+        student.setStatus(2);
+        studentService.updateStudent(student);
         if(count < 0){
             return ResultDTO.errorOf(500, "预约失败！");
         }else {
@@ -308,7 +311,14 @@ public class TeacherController {
         Teacher teacher = teacherMapper.queryTeacherById(id);
         String[] items = teacher.getItem().trim().split(" ");
         List<Comment> comments = commentMapper.queryCommentByParentId(id);
+        //评论条数
         int counts = commentMapper.countComment(id);
+        List countList = new ArrayList();
+        for (Comment comment:comments){
+            int countReply = commentMapper.countReply(comment.getId());
+            countList.add(countReply);
+            model.addAttribute("countList",countList);
+        }
         List<Article> articleList = articleMapper.queryAllTeaArticle();
         List<Order> ordersInfo = orderMapper.queryOrderInfo();
         model.addAttribute("items", items);

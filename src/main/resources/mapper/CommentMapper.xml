@@ -18,6 +18,12 @@
         where parent_id = #{parentId}
     </select>
 
+    <select id="countReply" resultType="int" parameterType="int">
+        select count(1)
+        from jiajiao.reply
+        where comment_id = #{commentId}
+    </select>
+
     <select id="queryAllComment" resultType="Comment">
         select * from jiajiao.comment
     </select>

@@ -99,7 +99,7 @@
 
                 <!-- Controls -->
                 <div style="float: right;margin-bottom: 5px;">
-                    <span style="float: left; margin-right: 550px;font-size: 17px;">新注册教员</span>
+                    <span style="float: left; margin-right: 550px;font-size: 17px;">新注册学员</span>
                     <button style="background-color: white;font-size: 1px;">
                         <a href="#carousel-example-generic" role="button" data-slide="prev">
                             <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
@@ -202,9 +202,8 @@
                         </div>
                     </div>
                 </div>
-
             </div>
-</div>
+        </div>
 
 
         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 " style="margin-top: 25px;">
@@ -218,8 +217,55 @@
 
             <div class="tab-content">
                 <div role="tabpanel" class="tab-pane active" id="home" style="border: 1px solid #eee">
-
                     <div class="clearfix" th:each="teacher : ${teachers}" style="padding: 15px 0px 0px 15px; border-right: 1px solid #eee;">
+                        <div class="media-left">
+                            <a href="#">
+                                <img target="_blank" src="http://www.jiajiao400.com/images2014/nopic.png" alt="" class="img-circle" style="height: 100px; width: 100px">
+                            </a>
+                        </div>
+                        <div class="media-body">
+                            <h4 class="media-heading" th:text="${teacher.username}"></h4>
+                            <div><span style="font-size: 16px">个人简介:</span><span class="text_desc" th:text="${teacher.description}" style="font-size: 15px"></span></div>
+                            <div><span style="font-size: 16px">课时费:</span><span th:text="${teacher.price}" style="font-size: 15px"></span></div>
+                            <br><br>
+                            <a th:href="'/teacher/toDetail/'+${teacher.id}"><button type="button" class="btn btn-default">联系该家教</button></a>
+                        </div>
+                    </div>
+                </div>
+                <div role="tabpanel" class="tab-pane" id="profile">
+                    <div class="clearfix" th:each="teacher : ${teacherByItem}" style="padding: 15px 0px 0px 15px; border-right: 1px solid #eee;">
+                        <div class="media-left">
+                            <a href="#">
+                                <img target="_blank" src="http://www.jiajiao400.com/images2014/nopic.png" alt="" class="img-circle" style="height: 100px; width: 100px">
+                            </a>
+                        </div>
+                        <div class="media-body">
+                            <h4 class="media-heading" th:text="${teacher.username}"></h4>
+                            <div><span style="font-size: 16px">个人简介:</span><span class="text_desc" th:text="${teacher.description}" style="font-size: 15px"></span></div>
+                            <div><span style="font-size: 16px">课时费:</span><span th:text="${teacher.price}" style="font-size: 15px"></span></div>
+                            <br><br>
+                            <a th:href="'/teacher/toDetail/'+${teacher.id}"><button type="button" class="btn btn-default">联系该家教</button></a>
+                        </div>
+                    </div>
+                </div>
+                <div role="tabpanel" class="tab-pane" id="messages">
+                    <div class="clearfix" th:each="teacher : ${teacherByItem2}" style="padding: 15px 0px 0px 15px; border-right: 1px solid #eee;">
+                        <div class="media-left">
+                            <a href="#">
+                                <img target="_blank" src="http://www.jiajiao400.com/images2014/nopic.png" alt="" class="img-circle" style="height: 100px; width: 100px">
+                            </a>
+                        </div>
+                        <div class="media-body">
+                            <h4 class="media-heading" th:text="${teacher.username}"></h4>
+                            <div><span style="font-size: 16px">个人简介:</span><span class="text_desc" th:text="${teacher.description}" style="font-size: 15px"></span></div>
+                            <div><span style="font-size: 16px">课时费:</span><span th:text="${teacher.price}" style="font-size: 15px"></span></div>
+                            <br><br>
+                            <a th:href="'/teacher/toDetail/'+${teacher.id}"><button type="button" class="btn btn-default">联系该家教</button></a>
+                        </div>
+                    </div>
+                </div>
+                <div role="tabpanel" class="tab-pane" id="settings">
+                    <div class="clearfix" th:each="teacher : ${teacherByItem3}" style="padding: 15px 0px 0px 15px; border-right: 1px solid #eee;">
                         <div class="media-left">
                             <a href="#">
                                 <img target="_blank" src="http://www.jiajiao400.com/images2014/nopic.png" alt="" class="img-circle" style="height: 100px; width: 100px">
@@ -233,11 +279,7 @@
                             <a th:href="'/teacher/toDetail/'+${teacher.id}"><button type="button" class="btn btn-default">联系该家教</button></a>
                         </div>
                     </div>
-                    <br><br><br><br>
                 </div>
-                <div role="tabpanel" class="tab-pane" id="profile">This p</div>
-                <div role="tabpanel" class="tab-pane" id="messages">This m</div>
-                <div role="tabpanel" class="tab-pane" id="settings">This s</div>
             </div>
         </div>
 

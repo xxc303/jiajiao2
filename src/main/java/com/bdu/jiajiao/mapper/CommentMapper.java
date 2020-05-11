@@ -18,6 +18,8 @@ public interface CommentMapper {
 
     int countComment(int id);
 
+    int countReply(int id);
+
     List<Comment> queryAllComment();
 
     int addReply(Reply reply);

@@ -53,8 +53,14 @@ public class IndexController {
         Object teacher = request.getSession().getAttribute("teacher");
         List<Teacher> teachers = teacherMapper.queryTeachersInfo();
         List<Student> students = studentMapper.queryStudentsInfo();
+        List<Teacher> teacherByItem = teacherMapper.queryTeacherByItem("语文");
+        List<Teacher> teacherByItem2 = teacherMapper.queryTeacherByItem("英语");
+        List<Teacher> teacherByItem3 = teacherMapper.queryTeacherByItem("数学");
         model.addAttribute("teachers",teachers);
         model.addAttribute("students",students);
+        model.addAttribute("teacherByItem",teacherByItem);
+        model.addAttribute("teacherByItem2",teacherByItem2);
+        model.addAttribute("teacherByItem3",teacherByItem3);
         session.setAttribute("url","showIndex");
         if (student != null){
             model.addAttribute("type","student");

@@ -147,12 +147,11 @@
                         <a th:href="@{'/student/student/?pageNum='+${(pageInfo.pageNum)-1}+'&pageSize='+${pageInfo.pageSize}}" aria-label="Previous" th:if="${search}==null">
                             <span aria-hidden="true">&lt;&lt;</span>
                         </a>
-                        <a th:href="@{'/student/search/?pageNum='+${(pageInfo.pageNum)-1}+'&pageSize='+${pageInfo.pageSize}}" aria-label="Previous" th:if="${search}!=null">
+                        <a th:href="@{'/student/search/?pageNum='+${(pageInfo.pageNum)-1}+'&pageSize='+${pageInfo.pageSize}+'&item='+${session.item}+'&area='+${session.area}}" aria-label="Previous" th:if="${search}!=null">
                             <span aria-hidden="true">&lt;&lt;</span>
                         </a>
 
                     </li>
-
 
                     <li th:each="page : ${pageInfo.navigatepageNums}" th:class="${pageInfo.pageNum == page}? 'active' : ''">
 
@@ -166,7 +165,7 @@
                         <a th:href="@{'/student/student?pageNum='+${pageInfo.nextPage}+'&pageSize='+${pageInfo.pageSize}}" aria-label="Previous" th:if="${search}==null">
                             <span aria-hidden="true">&gt;&gt;</span>
                         </a>
-                        <a th:href="@{'/student/search?pageNum='+${pageInfo.nextPage}+'&pageSize='+${pageInfo.pageSize}}" aria-label="Previous" th:if="${search}!=null">
+                        <a th:href="@{'/student/search?pageNum='+${pageInfo.nextPage}+'&pageSize='+${pageInfo.pageSize}+'&item='+${session.item}+'&area='+${session.area}}" aria-label="Previous" th:if="${search}!=null">
                             <span aria-hidden="true">&gt;&gt;</span>
                         </a>
                     </li>

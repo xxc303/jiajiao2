@@ -200,7 +200,7 @@
             <hr style="border: 2px solid #ddd">
             <div class="media_comment" >
                 <ul>
-                    <li th:each="comment : ${comments}">
+                    <li th:each="comment, commentStat: ${comments}">
                         <div class="nr2">
                             <span class="text_left" style="font-size: 15px; color:black" th:text="${comment.commentator}">岑女士</span>
                             <span class="comment_left" th:text="${#dates.format(comment.createTime,'yyyy-MM-dd')}+'发布'" style="float: right"></span>
@@ -215,7 +215,12 @@
                         <div class="nr2">
                             <span class="comment_left">综合评价：</span> <span class="comment_right" th:text="${comment.overview}" style="margin-right: 50px;color:green"></span>
                         </div>
-                        <span class="glyphicon glyphicon-comment comment_reply" th:data-id="${comment.id}" onclick="collapseComments(this)" style="margin-top: 6px;"></span>
+
+                        <span class="glyphicon glyphicon-thumbs-up comment_reply" style="margin-right:10px"></span>
+                        <span class="comment_reply" th:data-id="${comment.id}" onclick="collapseComments(this)">
+                            <span class="glyphicon glyphicon-comment"  style="margin-top: 6px;"></span>
+                            <span th:text="${ countList[commentStat.index]}">0</span>
+                        </span>
 
                         <div class="collapse sub-comment" th:id="${'comment-'+comment.id}">
                             <div class="form-group" style="height: 55px;">
