@@ -65,18 +65,6 @@
                         <li><a th:href="@{'/'+${type}+'/logout'}">退出</a></li>
                     </ul>
                 </li>
-                <!--管理员登录后显示-->
-                <li class="dropdown" th:if="${session.admin != null}">
-
-                    <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
-                       aria-expanded="true" id="dropdownMenu3" th:text="${session.admin.getUsername()}">
-                        <span class="caret"></span>
-                    </a>
-                    <ul class="dropdown-menu">
-                        <li><a th:href="@{'/'+${type}+'/toSetting'}">个人主页</a></li>
-                        <li><a th:href="@{'/'+${type}+'/logout'}">退出</a></li>
-                    </ul>
-                </li>
                 <!--没有登录显示-->
                 <li th:if="${session.student == null && session.teacher == null && session.admin== null}">
                     <a href="/">注册/登录</a>
