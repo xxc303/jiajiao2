@@ -14,6 +14,8 @@ public interface TeacherMapper {
 
     List<Teacher> queryAllTeacher();
 
+    List<Teacher> queryAllTeachers();
+
     Teacher queryTeacherById(@Param(value = "id") int id);
 
     Teacher queryTeacherByName(@Param(value = "username") String username);

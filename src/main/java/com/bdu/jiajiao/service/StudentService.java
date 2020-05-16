@@ -13,6 +13,8 @@ public interface StudentService {
 
     List<Student> queryAllStudent(int pageNum,int pageSize);
 
+    List<Student> queryAllStudents(int pageNum,int pageSize);
+
     Student findByToken(String token);
 
     Student findById(int id);

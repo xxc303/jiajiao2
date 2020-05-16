@@ -14,6 +14,8 @@ import java.util.List;
 public interface StudentMapper {
     List<Student> queryAllStudent();
 
+    List<Student> queryAllStudents();
+
     Student login(@Param("username")String username,@Param("password")String password);
 
     Student queryStudentByUsername(@Param("username") String username);

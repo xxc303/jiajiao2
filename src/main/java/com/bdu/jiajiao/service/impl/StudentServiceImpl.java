@@ -31,6 +31,13 @@ public class StudentServiceImpl implements StudentService {
     }
 
     @Override
+    public List<Student> queryAllStudents(int pageNum,int pageSize) {
+        PageHelper.startPage(pageNum,pageSize);
+        List<Student> studentList = studentMapper.queryAllStudents();
+        return studentList;
+    }
+
+    @Override
     public Student findByToken(String token) {
         return studentMapper.findByToken(token);
     }

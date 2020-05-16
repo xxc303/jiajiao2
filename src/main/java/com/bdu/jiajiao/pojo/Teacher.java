@@ -25,7 +25,7 @@ public class Teacher {
     private String price;
     private String token;
     private Date createTime;
-    private int status; //状态，0未认证正常，1已认证正常，2未认证封禁，3已认证封禁
+    private int status; //状态，0信息不全，1可预约、审核通过，2不能预约，3待审核
 
     public int getId() {
         return id;

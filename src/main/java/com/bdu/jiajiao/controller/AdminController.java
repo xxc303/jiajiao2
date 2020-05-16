@@ -221,6 +221,7 @@ public class AdminController {
     @ResponseBody
     public ResultDTO updateTeacher(@RequestBody TeacherDTO teacherDTO){
         Teacher teacher = teacherService.findById(teacherDTO.getId());
+        teacher.setStatus(1);//审核通过
         BeanUtils.copyProperties(teacherDTO,teacher);
         teacherService.updateTeacher(teacher);
         return ResultDTO.okOf();
@@ -233,7 +234,7 @@ public class AdminController {
     public String teacherInfo(Model model,
                               @RequestParam(defaultValue = "1") int pageNum,
                               @RequestParam(defaultValue = "2") int pageSize) {
-        List<Teacher> teachers = teacherService.queryAllTeacher(pageNum, pageSize);
+        List<Teacher> teachers = teacherService.queryAllTeachers(pageNum, pageSize);
         PageInfo<Teacher> pageInfo = new PageInfo<>(teachers);
 
         model.addAttribute("pageInfo", pageInfo);
@@ -270,6 +271,7 @@ public class AdminController {
     @ResponseBody
     public ResultDTO updateStudent(@RequestBody StudentDTO studentDTO){
         Student student = studentService.findById(studentDTO.getId());
+        student.setStatus(1);//审核通过
         BeanUtils.copyProperties(studentDTO,student);
         studentService.updateStudent(student);
         return ResultDTO.okOf();
@@ -282,7 +284,7 @@ public class AdminController {
     public String studentInfo(Model model,
                               @RequestParam(defaultValue = "1") int pageNum,
                               @RequestParam(defaultValue = "2") int pageSize) {
-        List<Student> students = studentService.queryAllStudent(pageNum, pageSize);
+        List<Student> students = studentService.queryAllStudents(pageNum, pageSize);
         PageInfo<Student> pageInfo = new PageInfo<>(students);
         model.addAttribute("pageInfo", pageInfo);
         model.addAttribute("type", "admin");
@@ -317,7 +319,7 @@ public class AdminController {
             response.addCookie(cookie);
             request.getSession().setAttribute("admin", admin);
             modelMap.addFlashAttribute("type", "admin");
-            return "redirect:/admin/dashBoard";
+            return "redirect:/admin/teacherInfo";
         }
     }
 

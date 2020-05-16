@@ -129,6 +129,11 @@
                                             <div class="modal-dialog modal-lg">
                                                 <div class="modal-content" style="margin-top: 200px;">
                                                     <div class="card-body" id="modal_tea">
+                                                        <form  class="form-inline">
+                                                            <span style="font-weight: bold;">审核:</span>
+                                                            <button type="button" class="btn btn-secondary" data-dismiss="modal" style="float:right;margin-left: 10px;">未通过</button>
+                                                            <button id="model_success" type="button" class="btn btn-success" style="float:right;margin-left: 20px;" onclick="updateTeacher()">审核通过</button>
+                                                        </form><br>
                                                         <input type="hidden" id="modal_tea_id"/>
                                                         <form  class="form-inline">
                                                             <div class="form-group">
@@ -190,8 +195,7 @@
                                                             <label for="modal_tea_desc">个人描述:</label>
                                                             <textarea type="text" class="form-control"id="modal_tea_desc" rows="10"></textarea>
                                                         </div>
-                                                        <button type="button" class="btn btn-secondary" data-dismiss="modal" style="float:right;">未通过</button>
-                                                        <button type="button" class="btn btn-success" style="float:right;margin-right: 20px;" onclick="updateTeacher()">审核通过</button>
+                                                        <button type="button" class="btn btn-primary" style="float:right;" onclick="updateTeacher()">提交修改</button>
                                                     </div>
                                                 </div>
                                             </div>
