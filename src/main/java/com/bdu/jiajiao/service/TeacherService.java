@@ -14,6 +14,8 @@ public interface TeacherService {
 
     List<Teacher> queryAllTeacher(int pageNum, int pageSize);
 
+    List<Teacher> queryAllTeachers(int pageNum, int pageSize);
+
     Teacher login(String username, String password);
 
     int updateTeacher(Teacher teacher);

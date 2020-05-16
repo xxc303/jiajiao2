@@ -5,7 +5,12 @@
     <select id="queryAllTeacher" resultType="Teacher">
         select *
         from jiajiao.teacher
-        where status != 0
+        where status = 1 or status = 2
+    </select>
+
+    <select id="queryAllTeachers" resultType="Teacher">
+        select *
+        from jiajiao.teacher
     </select>
 
     <select id="queryTeacherById" resultType="Teacher">

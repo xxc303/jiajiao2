@@ -29,6 +29,13 @@ public class TeacherServiceImpl implements TeacherService {
     }
 
     @Override
+    public List<Teacher> queryAllTeachers(int pageNum, int pageSize) {
+        PageHelper.startPage(pageNum,pageSize);
+        List<Teacher> teacherList = teacherMapper.queryAllTeachers();
+        return teacherList;
+    }
+
+    @Override
     public Teacher login(String username, String password) {
         Teacher login = teacherMapper.login(username, password);
         return login;

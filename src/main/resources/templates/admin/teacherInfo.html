@@ -86,6 +86,7 @@
                                                 <th>价格</th>
                                                 <th>教龄</th>
                                                 <th>注册时间</th>
+                                                <th>状态</th>
                                                 <!--                     span <th>个人描述</th>-->
                                                 <th>操作</th>
                                             </tr>
@@ -103,10 +104,15 @@
                                                 <td th:text="${#dates.format(teacher.createTime,'YYYY-MM-DD')}"></td>
                                                 <!--                        <th th:text="${teacher.description}"></th>-->
                                                 <td>
+                                                    <span class="label label-success" th:if="${teacher.status==1 || teacher.status==2}" th:text="审核通过" style="font-size: 1px;"></span>
+                                                    <span class="label label-danger" th:if="${teacher.status==3}" th:text="待审核" style="font-size: 1px;"></span>
+                                                    <span class="label label-default" th:if="${teacher.status==0}" th:text="未发布" style="font-size: 1px;"></span>
+                                                </td>
+                                                <td>
                                                     <button class="btn btn-info btn-sm" data-toggle="modal"
-                                                            data-target="#myModal" th:text="编辑" th:data-id="${teacher.id}"
+                                                            data-target="#myModal" th:text="详情信息" th:data-id="${teacher.id}"
                                                             onclick="findTeacherById(this)"
-                                                            style="width: 62px;">
+                                                            style="width: 67px;">
                                                     </button>
                                                     <button th:attr="del_uri=@{/admin/deleteTea/}+${teacher.id}"
                                                             class="btn btn-sm btn-danger deleteBtn" th:text="删除"
@@ -121,7 +127,7 @@
 
                                         <div class="modal fade bd-example-modal-lg" id="myModal" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
                                             <div class="modal-dialog modal-lg">
-                                                <div class="modal-content" style="margin-top: 260px;">
+                                                <div class="modal-content" style="margin-top: 200px;">
                                                     <div class="card-body" id="modal_tea">
                                                         <input type="hidden" id="modal_tea_id"/>
                                                         <form  class="form-inline">
@@ -184,7 +190,8 @@
                                                             <label for="modal_tea_desc">个人描述:</label>
                                                             <textarea type="text" class="form-control"id="modal_tea_desc" rows="10"></textarea>
                                                         </div>
-                                                        <button type="button" class="btn btn-primary" style="float:right;" onclick="updateTeacher()">提交修改</button>
+                                                        <button type="button" class="btn btn-secondary" data-dismiss="modal" style="float:right;">未通过</button>
+                                                        <button type="button" class="btn btn-success" style="float:right;margin-right: 20px;" onclick="updateTeacher()">审核通过</button>
                                                     </div>
                                                 </div>
                                             </div>
